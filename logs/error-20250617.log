@@ -1,0 +1,256 @@
+{"Time":"2025-06-17T11:40:03.131+08:00","TraceId":"7063c3a26bb74918e44c9b2fcfa94ed1","CtxStr":{"elapsed_time":1,"user_id":null},"Level":"ERRO","Content":"","Uri":"/api/xompose/v1/stacks","Status":500,"ClientIp":"127.0.0.1","RemoteIp":"127.0.0.1","Host":"127.0.0.1:9527","Params":null,"URL":"/api/xompose/v1/stacks"}
+{"Time":"2025-06-17T11:40:03.131+08:00","TraceId":"7063c3a26bb74918e44c9b2fcfa94ed1","CtxStr":{"elapsed_time":1,"user_id":null},"Level":"","Content":"","Uri":"/api/xompose/v1/stacks","Status":500,"ClientIp":"127.0.0.1","RemoteIp":"127.0.0.1","Host":"127.0.0.1:9527","Params":null,"URL":"/api/xompose/v1/stacks"}
+{"Time":"2025-06-17T11:40:44.115+08:00","Level":"INFO","Content":""}
+{"Time":"2025-06-17T13:16:45.532+08:00","TraceId":"b876c29cb2bc49184e5f4772b646f942","CtxStr":{"elapsed_time":1,"user_id":null},"Level":"ERRO","Content":"","Uri":"/api/xompose/v1/stacks","Status":500,"ClientIp":"127.0.0.1","RemoteIp":"127.0.0.1","Host":"127.0.0.1:9527","Params":null,"URL":"/api/xompose/v1/stacks"}
+{"Time":"2025-06-17T13:19:45.408+08:00","TraceId":"1036a899dbbc49187ec3425daef6779a","CtxStr":{"elapsed_time":3835,"user_id":null},"Level":"ERRO","Content":"","Uri":"/api/xompose/v1/stacks","Status":200,"ClientIp":"127.0.0.1","RemoteIp":"127.0.0.1","Host":"127.0.0.1:9527","Params":null,"URL":"/api/xompose/v1/stacks"}
+{"Time":"2025-06-17T13:32:40.211+08:00","TraceId":"807a8ae390bd49181e89ad04b5055aca","CtxStr":{"elapsed_time":9,"user_id":null},"Level":"ERRO","Content":"","Uri":"/api/xompose/v1/register","Status":200,"ClientIp":"127.0.0.1","RemoteIp":"127.0.0.1","Host":"127.0.0.1:9527","Params":{"password":123456,"password2":123456,"username":"xiaolu"},"URL":"/api/xompose/v1/register"}
+{"Time":"2025-06-17T13:33:24.889+08:00","TraceId":"c00f99559abd49185f0c5412780c257a","CtxStr":{"elapsed_time":4120,"user_id":null},"Level":"ERRO","Content":"","Uri":"/api/xompose/v1/stacks","Status":200,"ClientIp":"127.0.0.1","RemoteIp":"127.0.0.1","Host":"127.0.0.1:9527","Params":null,"URL":"/api/xompose/v1/stacks"}
+{"Time":"2025-06-17T13:33:24.889+08:00","TraceId":"c00f99559abd49185f0c5412780c257a","CtxStr":{"elapsed_time":4120,"user_id":null},"Level":"","Content":"","Uri":"/api/xompose/v1/stacks","Status":200,"ClientIp":"127.0.0.1","RemoteIp":"127.0.0.1","Host":"127.0.0.1:9527","Params":null,"URL":"/api/xompose/v1/stacks"}
+{"Time":"2025-06-17T13:33:30.996+08:00","TraceId":"309710b79cbd4918600c54123bc80947","CtxStr":{"elapsed_time":1,"user_id":null},"Level":"ERRO","Content":"","Uri":"/api/xompose/v1/login/username","Status":200,"ClientIp":"127.0.0.1","RemoteIp":"127.0.0.1","Host":"127.0.0.1:9527","Params":{},"URL":"/api/xompose/v1/login/username"}
+{"Time":"2025-06-17T13:33:31.000+08:00","TraceId":"309710b79cbd4918600c54123bc80947","CtxStr":{"elapsed_time":1,"user_id":null},"Level":"","Content":"","Uri":"/api/xompose/v1/login/username","Status":200,"ClientIp":"127.0.0.1","RemoteIp":"127.0.0.1","Host":"127.0.0.1:9527","Params":{},"URL":"/api/xompose/v1/login/username"}
+{"Time":"2025-06-17T13:34:01.802+08:00","TraceId":"40dc9cdda3bd4918610c54125e9632a8","CtxStr":{"elapsed_time":96,"user_id":null},"Level":"","Content":"","Uri":"/api/xompose/v1/login/username","Status":200,"ClientIp":"127.0.0.1","RemoteIp":"127.0.0.1","Host":"127.0.0.1:9527","Params":{"password":"123456","username":"xiaolu"},"URL":"/api/xompose/v1/login/username"}
+{"Time":"2025-06-17T13:34:05.148+08:00","TraceId":"c8ae2fa9a4bd4918620c541299a60676","CtxStr":{"elapsed_time":27,"user_id":4},"Level":"","Content":"","Uri":"/api/xompose/v1/stacks","Status":200,"ClientIp":"127.0.0.1","RemoteIp":"127.0.0.1","Host":"127.0.0.1:9527","Params":null,"URL":"/api/xompose/v1/stacks"}
+{"Time":"2025-06-17T13:35:01.832+08:00","TraceId":"d022bfdbb1bd4918630c54124d0551da","CtxStr":{"elapsed_time":28,"user_id":4},"Level":"ERRO","Content":"","Uri":"/api/xompose/v1/stack","Status":200,"ClientIp":"127.0.0.1","RemoteIp":"127.0.0.1","Host":"127.0.0.1:9527","Params":null,"URL":"/api/xompose/v1/stack?name=compose"}
+{"Time":"2025-06-17T13:35:01.833+08:00","TraceId":"d022bfdbb1bd4918630c54124d0551da","CtxStr":{"elapsed_time":28,"user_id":4},"Level":"","Content":"","Uri":"/api/xompose/v1/stack","Status":200,"ClientIp":"127.0.0.1","RemoteIp":"127.0.0.1","Host":"127.0.0.1:9527","Params":null,"URL":"/api/xompose/v1/stack?name=compose"}
+{"Time":"2025-06-17T13:35:08.137+08:00","TraceId":"9075a054b3bd4918640c5412867c306d","CtxStr":{"elapsed_time":10,"user_id":4},"Level":"ERRO","Content":"","Uri":"/api/xompose/v1/stack","Status":500,"ClientIp":"127.0.0.1","RemoteIp":"127.0.0.1","Host":"127.0.0.1:9527","Params":null,"URL":"/api/xompose/v1/stack?stack_name=compose"}
+{"Time":"2025-06-17T13:35:08.137+08:00","TraceId":"9075a054b3bd4918640c5412867c306d","CtxStr":{"elapsed_time":10,"user_id":4},"Level":"","Content":"","Uri":"/api/xompose/v1/stack","Status":500,"ClientIp":"127.0.0.1","RemoteIp":"127.0.0.1","Host":"127.0.0.1:9527","Params":null,"URL":"/api/xompose/v1/stack?stack_name=compose"}
+{"Time":"2025-06-17T13:36:02.281+08:00","TraceId":"086dc586bfbd4918e716e462cf304b84","CtxStr":{"elapsed_time":1773,"user_id":4},"Level":"ERRO","Content":"","Uri":"/api/xompose/v1/stack","Status":200,"ClientIp":"127.0.0.1","RemoteIp":"127.0.0.1","Host":"127.0.0.1:9527","Params":null,"URL":"/api/xompose/v1/stack?stack_name=compose"}
+2025-06-17T14:34:05.824+08:00 {901b0302ebc0491816944d383b095414} 200 "POST http 127.0.0.1:9527 /api/xompose/v1/stack/start HTTP/1.1" 30503.625, 127.0.0.1, "", "PostmanRuntime-ApipostRuntime/1.1.0", -1, "", ""
+Stack:
+1. YamlToProject
+   1).  xompose/pkg/utils.YamlToProject
+        /Users/lurenyang/node-project/xompose/pkg/utils/spec.go:24
+   2).  xompose/internal/logic/stack.(*sStack).StackStart
+        /Users/lurenyang/node-project/xompose/internal/logic/stack/stack_start.go:25
+   3).  xompose/internal/controller/stack.(*ControllerV1).StackStart
+        /Users/lurenyang/node-project/xompose/internal/controller/stack/stack_v1_stack_start.go:11
+   4).  xompose/internal/cmd/middleware.MiddlewareHandlerSession
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/session.go:22
+   5).  xompose/internal/cmd/middleware.MiddlewareCORS
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/cors.go:9
+   6).  xompose/internal/cmd/middleware.MiddlewareRequestTimeCost
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/time.go:11
+2. open /opt/stacks/web/compose.yml: no such file or directory
+
+2025-06-17T15:07:20.029+08:00 {98251c46bbc2491820215f4b86e69253} 200 "POST http 127.0.0.1:9527 /api/xompose/v1/login/username HTTP/1.1" 232279.500, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36", 53, "Invalid Parameter", ""
+Stack:
+1. 密码错误
+   1).  xompose/internal/logic/login.(*sLogin).UserLogin
+        /Users/lurenyang/node-project/xompose/internal/logic/login/login_user.go:23
+   2).  xompose/internal/controller/login.(*ControllerV1).Login
+        /Users/lurenyang/node-project/xompose/internal/controller/login/login_v1_login.go:11
+   3).  xompose/internal/cmd/middleware.MiddlewareHandlerSession
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/session.go:22
+   4).  xompose/internal/cmd/middleware.MiddlewareCORS
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/cors.go:9
+   5).  xompose/internal/cmd/middleware.MiddlewareRequestTimeCost
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/time.go:11
+
+2025-06-17T15:07:20.029+08:00 {98251c46bbc2491820215f4b86e69253} 200 "POST http 127.0.0.1:9527 /api/xompose/v1/login/username HTTP/1.1" 0.232, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:07:22.088+08:00 {885b21cabbc2491821215f4b1d4f4fda} 200 "POST http 127.0.0.1:9527 /api/xompose/v1/login/username HTTP/1.1" 72474.625, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36", 53, "Invalid Parameter", ""
+Stack:
+1. 密码错误
+   1).  xompose/internal/logic/login.(*sLogin).UserLogin
+        /Users/lurenyang/node-project/xompose/internal/logic/login/login_user.go:23
+   2).  xompose/internal/controller/login.(*ControllerV1).Login
+        /Users/lurenyang/node-project/xompose/internal/controller/login/login_v1_login.go:11
+   3).  xompose/internal/cmd/middleware.MiddlewareHandlerSession
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/session.go:22
+   4).  xompose/internal/cmd/middleware.MiddlewareCORS
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/cors.go:9
+   5).  xompose/internal/cmd/middleware.MiddlewareRequestTimeCost
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/time.go:11
+
+2025-06-17T15:07:22.088+08:00 {885b21cabbc2491821215f4b1d4f4fda} 200 "POST http 127.0.0.1:9527 /api/xompose/v1/login/username HTTP/1.1" 0.072, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:08:45.751+08:00 {38e15f42cfc2491822215f4b3c7bc132} 200 "POST http 127.0.0.1:9527 /api/xompose/v1/login/username HTTP/1.1" 0.118, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:12:00.322+08:00 {480dd586fcc2491823215f4b815dc567} 500 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 263497.417, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36", 68, "Internal Panic", ""
+Stack:
+1. exception recovered
+   1).  xompose/internal/dao.(*stackDao).List
+        /Users/lurenyang/node-project/xompose/internal/dao/stack.go:65
+   2).  xompose/internal/logic/stack.(*sStack).StackList
+        /Users/lurenyang/node-project/xompose/internal/logic/stack/stack_list.go:22
+   3).  xompose/internal/controller/stack.(*ControllerV1).StackList
+        /Users/lurenyang/node-project/xompose/internal/controller/stack/stack_v1_stack_list.go:11
+   4).  xompose/internal/cmd/middleware.MiddlewareHandlerSession
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/session.go:22
+   5).  xompose/internal/cmd/middleware.MiddlewareCORS
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/cors.go:9
+   6).  xompose/internal/cmd/middleware.MiddlewareRequestTimeCost
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/time.go:11
+2. runtime error: invalid memory address or nil pointer dereference
+
+2025-06-17T15:12:00.322+08:00 {480dd586fcc2491823215f4b815dc567} 500 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.263, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:12:16.545+08:00 {80772a5900c3491824215f4b850ef998} 500 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 73913.500, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36", 68, "Internal Panic", ""
+Stack:
+1. exception recovered
+   1).  xompose/internal/dao.(*stackDao).List
+        /Users/lurenyang/node-project/xompose/internal/dao/stack.go:65
+   2).  xompose/internal/logic/stack.(*sStack).StackList
+        /Users/lurenyang/node-project/xompose/internal/logic/stack/stack_list.go:22
+   3).  xompose/internal/controller/stack.(*ControllerV1).StackList
+        /Users/lurenyang/node-project/xompose/internal/controller/stack/stack_v1_stack_list.go:11
+   4).  xompose/internal/cmd/middleware.MiddlewareHandlerSession
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/session.go:22
+   5).  xompose/internal/cmd/middleware.MiddlewareCORS
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/cors.go:9
+   6).  xompose/internal/cmd/middleware.MiddlewareRequestTimeCost
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/time.go:11
+2. runtime error: invalid memory address or nil pointer dereference
+
+2025-06-17T15:12:16.546+08:00 {80772a5900c3491824215f4b850ef998} 500 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.073, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:12:27.486+08:00 {100a61df02c3491825215f4b067f679f} 500 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 171821.833, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36", 68, "Internal Panic", ""
+Stack:
+1. exception recovered
+   1).  xompose/internal/dao.(*stackDao).List
+        /Users/lurenyang/node-project/xompose/internal/dao/stack.go:65
+   2).  xompose/internal/logic/stack.(*sStack).StackList
+        /Users/lurenyang/node-project/xompose/internal/logic/stack/stack_list.go:22
+   3).  xompose/internal/controller/stack.(*ControllerV1).StackList
+        /Users/lurenyang/node-project/xompose/internal/controller/stack/stack_v1_stack_list.go:11
+   4).  xompose/internal/cmd/middleware.MiddlewareHandlerSession
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/session.go:22
+   5).  xompose/internal/cmd/middleware.MiddlewareCORS
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/cors.go:9
+   6).  xompose/internal/cmd/middleware.MiddlewareRequestTimeCost
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/time.go:11
+2. runtime error: invalid memory address or nil pointer dereference
+
+2025-06-17T15:12:27.489+08:00 {100a61df02c3491825215f4b067f679f} 500 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.171, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:12:28.432+08:00 {08e0f12003c3491826215f4b0f4e2e7e} 500 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 17003.083, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36", 68, "Internal Panic", ""
+Stack:
+1. exception recovered
+   1).  xompose/internal/dao.(*stackDao).List
+        /Users/lurenyang/node-project/xompose/internal/dao/stack.go:65
+   2).  xompose/internal/logic/stack.(*sStack).StackList
+        /Users/lurenyang/node-project/xompose/internal/logic/stack/stack_list.go:22
+   3).  xompose/internal/controller/stack.(*ControllerV1).StackList
+        /Users/lurenyang/node-project/xompose/internal/controller/stack/stack_v1_stack_list.go:11
+   4).  xompose/internal/cmd/middleware.MiddlewareHandlerSession
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/session.go:22
+   5).  xompose/internal/cmd/middleware.MiddlewareCORS
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/cors.go:9
+   6).  xompose/internal/cmd/middleware.MiddlewareRequestTimeCost
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/time.go:11
+2. runtime error: invalid memory address or nil pointer dereference
+
+2025-06-17T15:12:28.432+08:00 {08e0f12003c3491826215f4b0f4e2e7e} 500 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.017, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:12:29.999+08:00 {b8d95f7c03c3491827215f4b2996bf40} 500 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 51493.250, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36", 68, "Internal Panic", ""
+Stack:
+1. exception recovered
+   1).  xompose/internal/dao.(*stackDao).List
+        /Users/lurenyang/node-project/xompose/internal/dao/stack.go:65
+   2).  xompose/internal/logic/stack.(*sStack).StackList
+        /Users/lurenyang/node-project/xompose/internal/logic/stack/stack_list.go:22
+   3).  xompose/internal/controller/stack.(*ControllerV1).StackList
+        /Users/lurenyang/node-project/xompose/internal/controller/stack/stack_v1_stack_list.go:11
+   4).  xompose/internal/cmd/middleware.MiddlewareHandlerSession
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/session.go:22
+   5).  xompose/internal/cmd/middleware.MiddlewareCORS
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/cors.go:9
+   6).  xompose/internal/cmd/middleware.MiddlewareRequestTimeCost
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/time.go:11
+2. runtime error: invalid memory address or nil pointer dereference
+
+2025-06-17T15:12:30.000+08:00 {b8d95f7c03c3491827215f4b2996bf40} 500 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.051, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:12:34.522+08:00 {0099db8904c3491828215f4bf9ae7a6f} 500 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 55858.583, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36", 68, "Internal Panic", ""
+Stack:
+1. exception recovered
+   1).  xompose/internal/dao.(*stackDao).List
+        /Users/lurenyang/node-project/xompose/internal/dao/stack.go:65
+   2).  xompose/internal/logic/stack.(*sStack).StackList
+        /Users/lurenyang/node-project/xompose/internal/logic/stack/stack_list.go:22
+   3).  xompose/internal/controller/stack.(*ControllerV1).StackList
+        /Users/lurenyang/node-project/xompose/internal/controller/stack/stack_v1_stack_list.go:11
+   4).  xompose/internal/cmd/middleware.MiddlewareHandlerSession
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/session.go:22
+   5).  xompose/internal/cmd/middleware.MiddlewareCORS
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/cors.go:9
+   6).  xompose/internal/cmd/middleware.MiddlewareRequestTimeCost
+        /Users/lurenyang/node-project/xompose/internal/cmd/middleware/time.go:11
+2. runtime error: invalid memory address or nil pointer dereference
+
+2025-06-17T15:12:34.523+08:00 {0099db8904c3491828215f4bf9ae7a6f} 500 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.055, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:35:47.537+08:00 {a08a14e348c44918c7b16a1ffc0797d0} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 1167.416, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0", 51, "Validation Failed", ""
+Stack:
+未登录
+2025-06-17T15:35:47.538+08:00 {a08a14e348c44918c7b16a1ffc0797d0} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.001, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:35:57.956+08:00 {908d25504bc44918c8b16a1fb6111b5c} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 523.125, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0", 51, "Validation Failed", ""
+Stack:
+未登录
+2025-06-17T15:35:57.957+08:00 {908d25504bc44918c8b16a1fb6111b5c} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.000, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:36:34.895+08:00 {f87f88e953c44918cab16a1f43b4b600} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 6718.500, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0", 51, "Validation Failed", ""
+Stack:
+未登录
+2025-06-17T15:36:34.895+08:00 {f87f88e953c44918cab16a1f43b4b600} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.006, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:36:35.087+08:00 {e8ca75e953c44918c9b16a1f82757d3c} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.200, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:36:37.125+08:00 {80f85c6e54c44918cbb16a1fe8290c50} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 2934.625, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0", 51, "Validation Failed", ""
+Stack:
+未登录
+2025-06-17T15:36:37.125+08:00 {80f85c6e54c44918cbb16a1fe8290c50} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.002, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:36:37.158+08:00 {00e9636f54c44918ccb16a1ff39cb421} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.023, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:36:42.239+08:00 {80bc939f55c44918cdb16a1fdb5f9b10} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 717.459, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0", 51, "Validation Failed", ""
+Stack:
+未登录
+2025-06-17T15:36:42.239+08:00 {80bc939f55c44918cdb16a1fdb5f9b10} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.000, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:36:57.053+08:00 {98e0861259c44918ceb16a1fe8737490} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 1418.042, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0", 51, "Validation Failed", ""
+Stack:
+未登录
+2025-06-17T15:36:57.054+08:00 {98e0861259c44918ceb16a1fe8737490} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.001, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:37:13.571+08:00 {e84121eb5cc44918cfb16a1fca3f5713} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 502.917, 127.0.0.1, "http://127.0.0.1:8081/login", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0", 51, "Validation Failed", ""
+Stack:
+未登录
+2025-06-17T15:37:13.571+08:00 {e84121eb5cc44918cfb16a1fca3f5713} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.000, 127.0.0.1, "http://127.0.0.1:8081/login", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:37:21.930+08:00 {902821d85ec44918d0b16a1f58599b4d} 200 "POST http 127.0.0.1:9527 /api/xompose/v1/login/username HTTP/1.1" 0.090, 127.0.0.1, "http://127.0.0.1:8081/login", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:37:28.405+08:00 {e0f82d5e60c44918d1b16a1f84634752} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.019, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:38:24.099+08:00 {8075ec526dc44918d2b16a1fd84dd169} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.067, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:40:33.253+08:00 {385047658bc44918d4b16a1f3d112b08} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.064, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:40:33.253+08:00 {d024db648bc44918d3b16a1f6e934f44} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.072, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:40:54.841+08:00 {30ac4c6b90c44918d6b16a1fa965eebc} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.078, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:40:54.841+08:00 {e86ef06a90c44918d5b16a1f7ae959fb} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.084, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:40:57.966+08:00 {8817072991c44918d7b16a1f0662d8f3} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.019, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:41:02.408+08:00 {80efa53192c44918d8b16a1f921e5e78} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.020, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:41:03.320+08:00 {2079186892c44918d9b16a1fba256f44} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.019, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:42:37.549+08:00 {102e0151a8c44918dab16a1f67f7e8db} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.147, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:42:38.001+08:00 {0087f671a8c44918dbb16a1fc3e29bf7} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.044, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:42:46.157+08:00 {e0736156aac44918dcb16a1f61b8f0ef} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.075, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:42:46.157+08:00 {d0c96156aac44918ddb16a1ffaa4033f} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.074, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:42:53.283+08:00 {d877df02acc44918dfb16a1f907282b7} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.011, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:42:53.286+08:00 {9012dd02acc44918deb16a1fcc0d71c3} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.015, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:42:56.574+08:00 {08694bc5acc44918e0b16a1fb6f22d53} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.041, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:43:01.897+08:00 {e873ad03aec44918e1b16a1f00a3ada5} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.021, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:43:02.761+08:00 {00698537aec44918e2b16a1fbc384b08} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.016, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:45:17.665+08:00 {60aea895cdc44918e4b16a1f35f02727} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.199, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:45:17.666+08:00 {28be9995cdc44918e3b16a1f27ead698} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.219, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:45:17.685+08:00 {d835d9a1cdc44918e6b16a1fab211549} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.012, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:45:17.685+08:00 {7841b0a1cdc44918e5b16a1fb7eed100} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.015, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:45:18.125+08:00 {389654bbcdc44918e8b16a1f031baa83} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.025, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:45:18.125+08:00 {40cc2fbbcdc44918e7b16a1f1719e314} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.027, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:45:31.406+08:00 {406911d0d0c44918eab16a1f4f0c83c2} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.073, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:45:31.407+08:00 {38846dcfd0c44918e9b16a1f4cefb669} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.086, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:46:13.376+08:00 {d8d56293dac44918ebb16a1fe95cfaa4} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.112, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:46:13.377+08:00 {480ff895dac44918ecb16a1f5057ab58} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.069, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:46:23.197+08:00 {5883f6dedcc44918eeb16a1ff3c12111} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.084, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:46:23.197+08:00 {30b400dbdcc44918edb16a1fe0e0739e} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.145, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:47:03.108+08:00 {d0b1cd2ae6c44918f0b16a1fec15319d} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.058, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:47:03.108+08:00 {c0f89d28e6c44918efb16a1fd784265f} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.096, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:47:03.120+08:00 {d031772ee6c44918f2b16a1f80ee8fde} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.009, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:47:03.121+08:00 {70c4762ee6c44918f1b16a1f5ffe2924} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.010, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:47:03.208+08:00 {70aa0933e6c44918f4b16a1f46aa4e21} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.020, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:47:03.208+08:00 {f817fb32e6c44918f3b16a1f1a75d56f} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.021, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:47:09.118+08:00 {4013fe90e7c44918f5b16a1fe89ea9b7} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.068, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:47:09.125+08:00 {90991d91e7c44918f6b16a1f1bc0389d} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.074, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:47:11.757+08:00 {a88abb2fe8c44918f8b16a1f735e164b} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.034, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:47:11.757+08:00 {609cc62de8c44918f7b16a1f923de657} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.068, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:47:17.135+08:00 {e8970e70e9c44918fab16a1f546c003a} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.039, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:47:17.135+08:00 {a827dd6fe9c44918f9b16a1f132562ad} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.042, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:47:53.603+08:00 {98cf62eaf1c44918fcb16a1ffb62b782} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.095, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:47:53.603+08:00 {20eb43e8f1c44918fbb16a1f206f5e3e} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.131, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:47:57.678+08:00 {c0b0fce1f2c44918fdb16a1ff0ac2ff5} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.015, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:47:57.678+08:00 {08b00fe2f2c44918feb16a1f45be1769} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.014, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:48:00.687+08:00 {105f7295f3c4491800b26a1f73b9ec60} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.014, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-17T15:48:00.688+08:00 {a89a5d95f3c44918ffb16a1f9b17d12f} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.016, 127.0.0.1, "http://127.0.0.1:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
+2025-06-17T15:53:31.087+08:00 {30142c8240c5491801b26a1f35ecf8d5} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 34747.083, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0", 51, "Validation Failed", ""
+Stack:
+未登录
+2025-06-17T15:53:31.089+08:00 {30142c8240c5491801b26a1f35ecf8d5} 200 "GET http 127.0.0.1:9527 /api/xompose/v1/stacks HTTP/1.1" 0.034, 127.0.0.1, "http://localhost:8081/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"

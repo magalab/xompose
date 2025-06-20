@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 在全局样式文件中添加 */
+input[type="password"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+input[type="password"]::-ms-reveal {
+  display: none;
+}
+
+input[type="password"] {
+  -moz-appearance: none;
+  appearance: none;
+}

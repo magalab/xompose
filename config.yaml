@@ -1,0 +1,34 @@
+server:
+  address:     ":9527"
+  openapiPath: "/api.json"
+  swaggerPath: "/swagger"
+  logPath: "logs"
+  accessLogEnabled: true
+  accessLogPattern: "access.{Ymd}.log"
+  stackPath: "/opt/stacks"
+
+logger:
+  path: "logs"
+  level : "all"
+  stdout: true
+  StStatus: 1
+  stack: false
+  file: "{Y-m-d}.log"
+  rotateSize: "10M"
+  rotateBackupLimit: 2
+  rotateBackupExpire: "7d"
+  rotateBackupCompress:  9 
+
+database:
+  logger:
+    path:    "logs"
+    file: "db-{Y-m-d}.log"
+    level:   "all"
+    stdout:  true
+    rotateSize: "10M"
+    rotateBackupLimit: 2
+    rotateBackupExpire: "7d"
+    rotateBackupCompress:  9 
+  default:
+    link: "mysql:root:123456@tcp(127.0.0.1:3306)/xompose?charset=utf8mb4&parseTime=True&loc=Local"
+    debug: true
