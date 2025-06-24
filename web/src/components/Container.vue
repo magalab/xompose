@@ -1,5 +1,5 @@
 <template>
-    <div class="shadow-box big-padding mb-3 container">
+    <div class="shadow-box big-padding mb-3">
         <div class="row">
             <div class="col-7">
                 <h4>{{ name }}</h4>
@@ -9,7 +9,7 @@
                 <div v-if="!isEditMode">
                     <span class="badge me-1" :class="bgStyle">{{ status }}</span>
 
-                    <a v-for="port in envsubstService.ports" :key="port" :href="parsePort(port).url" target="_blank">
+                    <a v-for="port in envSubstService.ports" :key="port" :href="parsePort(port).url" target="_blank">
                         <span class="badge me-1 bg-secondary">{{ parsePort(port).display }}</span>
                     </a>
                 </div>
@@ -38,11 +38,11 @@
         </div>
 
         <transition name="slide-fade" appear>
-            <div v-if="isEditMode && showConfig" class="config mt-3">
+            <div v-if="isEditMode && showConfig" class="mt-3">
                 <!-- Image -->
                 <div class="mb-4">
                     <label class="form-label">
-                        {{ $t("dockerImage") }}
+                        镜像
                     </label>
                     <div class="input-group mb-3">
                         <input v-model="service.image" class="form-control" list="image-datalist" />
@@ -58,44 +58,52 @@
                 <!-- Ports -->
                 <div class="mb-4">
                     <label class="form-label">
-                        {{ $tc("port", 2) }}
+                        <!-- {{ $tc("port", 2) }} -->
+                        ports
                     </label>
-                    <ArrayInput name="ports" :display-name="$t('port')" placeholder="HOST:CONTAINER" />
+                    <!-- <ArrayInput name="ports" :display-name="$t('port')" placeholder="HOST:CONTAINER" /> -->
+                    <ArrayInput name="ports" display-name="port" placeholder="HOST:CONTAINER" />
                 </div>
 
                 <!-- Volumes -->
                 <div class="mb-4">
                     <label class="form-label">
-                        {{ $tc("volume", 2) }}
+                        <!-- {{ $tc("volume", 2) }} -->
+                        volumn
                     </label>
-                    <ArrayInput name="volumes" :display-name="$t('volume')" placeholder="HOST:CONTAINER" />
+                    <!-- <ArrayInput name="volumes" :display-name="$t('volume')" placeholder="HOST:CONTAINER" /> -->
+                    <ArrayInput name="volumes" display-name="volume" placeholder="HOST:CONTAINER" />
                 </div>
 
                 <!-- Restart Policy -->
                 <div class="mb-4">
                     <label class="form-label">
-                        {{ $t("restartPolicy") }}
+                        <!-- {{ $t("restartPolicy") }} -->
+                        restartPolicy
                     </label>
                     <select v-model="service.restart" class="form-select">
-                        <option value="always">{{ $t("restartPolicyAlways") }}</option>
-                        <option value="unless-stopped">{{ $t("restartPolicyUnlessStopped") }}</option>
-                        <option value="on-failure">{{ $t("restartPolicyOnFailure") }}</option>
-                        <option value="no">{{ $t("restartPolicyNo") }}</option>
+                        <option value="always">restartPolicyAlways </option>
+                        <option value="unless-stopped">restartPolicyUnlessStopped</option>
+                        <option value="on-failure">restartPolicyOnFailure</option>
+                        <option value="no">restartPolicyNo</option>
                     </select>
                 </div>
 
                 <!-- Environment Variables -->
                 <div class="mb-4">
                     <label class="form-label">
-                        {{ $tc("environmentVariable", 2) }}
+                        <!-- {{ $tc("environmentVariable", 2) }} -->
+                        environmentVariable
                     </label>
-                    <ArrayInput name="environment" :display-name="$t('environmentVariable')" placeholder="KEY=VALUE" />
+                    <!-- <ArrayInput name="environment" :display-name="$t('environmentVariable')" placeholder="KEY=VALUE" /> -->
+                    <ArrayInput name="environment" display-name="environmentVariable" placeholder="KEY=VALUE" />
                 </div>
 
                 <!-- Container Name -->
                 <div v-if="false" class="mb-4">
                     <label class="form-label">
-                        {{ $t("containerName") }}
+                        <!-- {{ $t("containerName") }} -->
+                        containerName
                     </label>
                     <div class="input-group mb-3">
                         <input v-model="service.container_name" class="form-control" />
@@ -106,24 +114,29 @@
                 <!-- Network -->
                 <div class="mb-4">
                     <label class="form-label">
-                        {{ $tc("network", 2) }}
+                        <!-- {{ $tc("network", 2) }} -->
+                        network
                     </label>
 
                     <div v-if="networkList.length === 0 && service.networks && service.networks.length > 0"
                         class="text-warning mb-3">
-                        {{ $t("NoNetworksAvailable") }}
+                        <!-- {{ $t("NoNetworksAvailable") }} -->
+                        NoNetworksAvailable
                     </div>
 
-                    <ArraySelect name="networks" :display-name="$t('network')" placeholder="Network Name"
+                    <!-- <ArraySelect name="networks" :display-name="$t('network')" placeholder="Network Name" -->
+                    <ArraySelect name="networks" display-name="network" placeholder="Network Name"
                         :options="networkList" />
                 </div>
 
                 <!-- Depends on -->
                 <div class="mb-4">
                     <label class="form-label">
-                        {{ $t("dependsOn") }}
+                        <!-- {{ $t("dependsOn") }} -->
+                        dependsOn
                     </label>
-                    <ArrayInput name="depends_on" :display-name="$t('dependsOn')" :placeholder="$t(`containerName`)" />
+                    <!-- <ArrayInput name="depends_on" :display-name="$t('dependsOn')" :placeholder="$t(`containerName`)" /> -->
+                    <ArrayInput name="depends_on" display-name="dependsOn" placeholder="containerName" />
                 </div>
             </div>
         </transition>
@@ -131,6 +144,8 @@
 </template>
 
 <script setup lang="ts">
+
+import { parseDockerPort } from "@/utils/container"
 
 const showConfig = ref(false)
 
@@ -154,147 +169,116 @@ const props = defineProps({
 })
 
 const networkList = computed(() => {
-    let list = [];
-    // for (const networkName in this.jsonObject.networks) {
-    //     list.push(networkName);
-    // }
-    return list;
+    let list = []
+    for (const networkName in jsonObject.networks) {
+        list.push(networkName)
+    }
+    return list
 })
 
 const bgStyle = computed(() => {
-    // if (this.status === "running" || this.status === "healthy") {
-    //     return "bg-primary";
-    // } else if (this.status === "unhealthy") {
-    //     return "bg-danger";
-    // } else {
-    //     return "bg-secondary";
-    // }
+    if (status === "running" || status === "healthy") {
+        return "bg-primary"
+    } else if (status === "unhealthy") {
+        return "bg-danger"
+    } else {
+        return "bg-secondary"
+    }
 })
 
 
-const parsePort = (port) => {
-    // if (this.stack.endpoint) {
-    //     return parseDockerPort(port, this.stack.primaryHostname);
-    // } else {
-    //     let hostname = this.$root.info.primaryHostname || location.hostname;
-    //     return parseDockerPort(port, hostname);
-    // }
-}
 const remove = () => {
-    // delete this.jsonObject.services[this.name];
+    // delete this.jsonObject.services[this.name]
 }
 
-
-import { defineComponent } from "vue";
-// import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { parsePort } from "@/utils/container";
-
-export default defineComponent({
-
-    computed: {
-
-        terminalRouteLink() {
-            if (this.endpoint) {
-                return {
-                    name: "containerTerminalEndpoint",
-                    params: {
-                        endpoint: this.endpoint,
-                        stackName: this.stackName,
-                        serviceName: this.name,
-                        type: "bash",
-                    },
-                };
-            } else {
-                return {
-                    name: "containerTerminal",
-                    params: {
-                        stackName: this.stackName,
-                        serviceName: this.name,
-                        type: "bash",
-                    },
-                };
-            }
-        },
-
-        endpoint() {
-            return this.$parent.$parent.endpoint;
-        },
-
-        stack() {
-            return this.$parent.$parent.stack;
-        },
-
-        stackName() {
-            return this.$parent.$parent.stack.name;
-        },
-
-        service() {
-            if (!this.jsonObject.services[this.name]) {
-                return {};
-            }
-            return this.jsonObject.services[this.name];
-        },
-
-        jsonObject() {
-            return this.$parent.$parent.jsonConfig;
-        },
-
-        envsubstJSONConfig() {
-            return this.$parent.$parent.envsubstJSONConfig;
-        },
-
-        envsubstService() {
-            if (!this.envsubstJSONConfig.services[this.name]) {
-                return {};
-            }
-            return this.envsubstJSONConfig.services[this.name];
-        },
-
-        imageName() {
-            if (this.envsubstService.image) {
-                return this.envsubstService.image.split(":")[0];
-            } else {
-                return "";
-            }
-        },
-
-        imageTag() {
-            if (this.envsubstService.image) {
-                let tag = this.envsubstService.image.split(":")[1];
-
-                if (tag) {
-                    return tag;
-                } else {
-                    return "latest";
-                }
-            } else {
-                return "";
-            }
-        },
-    },
-});
-</script>
-
-<style scoped lang="scss">
-@import "../styles/vars";
-
-.container {
-    .image {
-        font-size: 0.8rem;
-        color: #6c757d;
-
-        .tag {
-            color: #33383b;
+const terminalRouteLink = computed(() => {
+    if (props.endpoint) {
+        return {
+            name: "containerTerminalEndpoint",
+            params: {
+                endpoint: this.endpoint,
+                stackName: this.stackName,
+                serviceName: this.name,
+                type: "bash",
+            },
+        }
+    } else {
+        return {
+            name: "containerTerminal",
+            params: {
+                stackName: this.stackName,
+                serviceName: this.name,
+                type: "bash",
+            },
         }
     }
+})
 
-    .function {
-        align-content: center;
-        display: flex;
-        height: 100%;
-        width: 100%;
-        align-items: center;
-        justify-content: end;
+const envSubstJSONConfig = computed(() => {
+    // return this.$parent.$parent.envsubstJSONConfig;
+})
+
+const envSubstService = computed(() => {
+    if (!envSubstJSONConfig.services[props.name]) {
+        return {}
     }
+    return envSubstJSONConfig.services[props.name]
+})
+
+const imageName = computed(() => {
+    if (envSubstService.image) {
+        return envSubstService.image.split(":")[0]
+    } else {
+        return ""
+    }
+})
+const imageTag = (() => {
+    if (envSubstService.image) {
+        let tag = envSubstService.image.split(":")[1]
+
+        if (tag) {
+            return tag
+        } else {
+            return "latest"
+        }
+    } else {
+        return ""
+    }
+})
+
+
+const endpoint = computed(() => {
+    // return this.$parent.$parent.endpoint
+})
+
+const stack = computed(() => {
+    // return this.$parent.$parent.stack
+})
+
+const stackName = computed(() => {
+    // return this.$parent.$parent.stack.name
+})
+
+const service = computed(() => {
+    if (!jsonObject.services[props.name]) {
+        return {}
+    }
+    return jsonObject.services[props.name]
+})
+
+const jsonObject = computed(() => {
+    // return this.$parent.$parent.jsonConfig
+})
+
+const parsePort = (port) => {
+    // if (props.stack.endpoint) {
+    // return parseDockerPort(port, props.stack.primaryHostname);
+    // } else {
+    // let hostname = this.$root.info.primaryHostname || location.hostname;
+    // return parseDockerPort(port, hostname);
+    // }
 }
-</style>
+
+
+
+</script>

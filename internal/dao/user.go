@@ -8,6 +8,8 @@ import (
 	"context"
 	"xompose/internal/dao/internal"
 	"xompose/internal/model"
+
+	"github.com/gogf/gf/v2/frame/g"
 )
 
 // userDao is the data access object for the table user.
@@ -44,4 +46,23 @@ func (d *userDao) GetUserById(ctx context.Context, id int) (user *model.UserMode
 	}
 
 	return item, nil
+}
+
+// Count 统计用户数量
+func (d *userDao) Count(ctx context.Context) (int, error) {
+	return d.Ctx(ctx).Count()
+}
+
+// UpdatePasswordById 更新密码
+func (d *userDao) UpdatePasswordById(ctx context.Context, id int, password string) error {
+	updater := g.Map{
+		d.Columns().Password: password,
+	}
+	if _, err := d.Ctx(ctx).
+		Where(d.Columns().Id, id).
+		UpdateAndGetAffected(updater); err != nil {
+		return err
+	}
+
+	return nil
 }

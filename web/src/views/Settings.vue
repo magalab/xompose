@@ -1,30 +1,27 @@
 <template>
     <div>
         <h1 v-show="show" class="mb-3">
-            <!-- {{ $t("Settings") }} -->
             设置
         </h1>
 
-        <div class="shadow-box shadow-box-settings">
-            <div class="row">
-                <div v-if="showSubMenu" class="settings-menu col-lg-3 col-md-5">
-                    <router-link v-for="(item, key) in subMenus" :key="key" :to="`/settings/${key}`">
-                        <div class="menu-item">
+        <div class="shadow-box p-20px min-h-[calc(100vh-155px)]">
+            <div class="flex flex-row">
+                <div v-if="showSubMenu" class="lg:w-3/12 md:w-5/12">
+                    <router-link v-for="(item, key) in subMenus" :key="key" :to="`/settings/${key}`"
+                        class="no-underline">
+                        <div
+                            class="rounded-[10px] m-2 p-[0.7em_1em] cursor-pointer border-l-0 
+                            transition-all duration-100 ease-in-out 
+                            hover:bg-[#e7faec] 
+                            active:rounded-l-0 active:border-b-1 active:border-solid active:border-[#74c2ff] active:bg-[#e7faec]">
                             {{ item.title }}
                         </div>
                     </router-link>
-
-                    <!-- Logout Button -->
-                    <!-- <a v-if="$root.isMobile && $root.loggedIn && $root.socket.token !== 'autoLogin'" class="logout"
-                        @click.prevent="$root.logout">
-                        <div class="menu-item">
-                            <font-awesome-icon icon="sign-out-alt" />
-                            {{ $t("Logout") }}
-                        </div>
-                    </a> -->
                 </div>
-                <div class="settings-content col-lg-9 col-md-7">
-                    <div v-if="currentPage" class="settings-content-header">
+                <div class="lg:w-9/12 md:w-7/12">
+                    <div v-if="currentPage" class="w-[calc(100%+20px)] 
+                        border-b-1 border-b-solid border-b-[#dee2e6] rounded-r-[10px]
+                        mt-[-20px] mr-[-20px] py-12.5px px-16px text-26px">
                         {{ subMenus[currentPage].title }}
                     </div>
                     <div class="mx-3">
@@ -40,7 +37,7 @@
     </div>
 </template>
 
-<script setup lang="ts" >
+<script setup lang="ts">
 
 const router = useRouter()
 
@@ -62,9 +59,9 @@ const subMenus = ref({
     general: {
         title: "General",
     },
-    appearance: {
-        title: "Appearance",
-    },
+    // appearance: {
+    //     title: "Appearance",
+    // },
     // security: {
     //     title: this.$t("Security"),
     // },
@@ -94,8 +91,8 @@ onMounted(() => {
 
 const loadGeneralPage = () => {
     // mobile todo
-    if (currentPage) {
-        router.push("/settings.appearance")
+    if (!currentPage) {
+        router.push("/settings/appearance")
     }
 }
 
@@ -120,7 +117,7 @@ const saveSettings = () => {
         //         callback();
         //     }
         // });
-    }else{
+    } else {
         // Toast 警告
         alert(msg)
     }
@@ -139,83 +136,3 @@ const validSettings = () => {
     }
 }
 </script>
-
-<style lang="scss" scoped>
-@import "../styles/vars.scss";
-
-.shadow-box-settings {
-    padding: 20px;
-    min-height: calc(100vh - 155px);
-}
-
-footer {
-    color: #aaa;
-    font-size: 13px;
-    margin-top: 20px;
-    padding-bottom: 30px;
-    text-align: center;
-}
-
-.settings-menu {
-    a {
-        text-decoration: none !important;
-    }
-
-    .menu-item {
-        border-radius: 10px;
-        margin: 0.5em;
-        padding: 0.7em 1em;
-        cursor: pointer;
-        border-left-width: 0;
-        transition: all ease-in-out 0.1s;
-    }
-
-    .menu-item:hover {
-        background: $highlight-white;
-
-        .dark & {
-            background: $dark-header-bg;
-        }
-    }
-
-    .active .menu-item {
-        background: $highlight-white;
-        border-left: 4px solid $primary;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-
-        .dark & {
-            background: $dark-header-bg;
-        }
-    }
-}
-
-.settings-content {
-    .settings-content-header {
-        width: calc(100% + 20px);
-        border-bottom: 1px solid #dee2e6;
-        border-radius: 0 10px 0 0;
-        margin-top: -20px;
-        margin-right: -20px;
-        padding: 12.5px 1em;
-        font-size: 26px;
-
-        .dark & {
-            background: $dark-header-bg;
-            border-bottom: 0;
-        }
-
-        .mobile & {
-            padding: 15px 0 0 0;
-
-            .dark & {
-                background-color: transparent;
-            }
-        }
-    }
-}
-
-.logout {
-    color: $danger !important;
-}
-</style>

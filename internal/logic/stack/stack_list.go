@@ -24,7 +24,9 @@ func (s *sStack) StackList(ctx context.Context, req *model.StackListReq) ([]*mod
 	}
 	arr := lo.Map(stacks, func(stack api.Stack, _ int) *model.StackListItem {
 		return &model.StackListItem{
+
 			StackItem: &model.StackItem{
+				Id:          stack.ID,
 				StackName:   stack.Name,
 				StackStatus: model.StackStatus(stack.Status),
 			},

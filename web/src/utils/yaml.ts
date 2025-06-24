@@ -1,10 +1,10 @@
 import type { DotenvParseOutput } from "dotenv";
-import yaml, { Pair, Scalar, type Document } from "yaml";
+import yaml, { Pair, parseDocument, Scalar, type Document } from "yaml";
 
 // @ts-ignore
 import { replaceVariablesSync } from "@inventage/envsubst";
 
-export function envsubstYAML(content: string, env: DotenvParseOutput): string {
+export function envSubstYAML(content: string, env: DotenvParseOutput): string {
     const doc = yaml.parseDocument(content);
     if (doc.contents) {
         // @ts-ignore
@@ -20,7 +20,7 @@ export interface LooseObject {
     [key: string]: any
 }
 
-export const envsubst = (string : string, variables : LooseObject) : string => {
+export const envSubst = (string: string, variables: LooseObject): string => {
     return replaceVariablesSync(string, variables)[0];
 }
 
@@ -40,14 +40,14 @@ const traverseYAML = (pair: Pair, env: DotenvParseOutput): void => {
                 let value = item.value as unknown;
 
                 if (typeof (value) === "string") {
-                    item.value = envsubst(value, env);
+                    item.value = envSubst(value, env);
                 }
             }
         }
         // @ts-ignore
     } else if (pair.value && typeof (pair.value.value) === "string") {
         // @ts-ignore
-        pair.value.value = envsubst(pair.value.value, env);
+        pair.value.value = envSubst(pair.value.value, env);
     }
 }
 
@@ -60,4 +60,25 @@ export const copyYAMLComments = (doc: Document, src: Document) => {
         // @ts-ignore
         copyYAMLCommentsItems(doc.contents.items, src.contents.items);
     }
+}
+
+export const yamlToJSON = (yaml: string) => {
+    let doc = parseDocument(yaml);
+    if (doc.errors.length > 0) {
+        throw doc.errors[0];
+    }
+
+    const config = doc.toJS() ?? {};
+
+    // Check data types
+    // "services" must be an object
+    if (!config.services) {
+        config.services = {};
+    }
+
+    if (Array.isArray(config.services) || typeof config.services !== "object") {
+        throw new Error("Services must be an object");
+    }
+
+    return { config, doc }
 }

@@ -7,6 +7,7 @@ type StackModel struct {
 }
 
 type StackItem struct {
+	Id          string      `json:"id"`
 	StackName   string      `json:"stackName"`
 	StackStatus StackStatus `json:"stackStatus"`
 }

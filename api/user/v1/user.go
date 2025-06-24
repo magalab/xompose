@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"xompose/api"
 	"xompose/internal/model"
 
 	"github.com/gogf/gf/v2/frame/g"
@@ -44,3 +45,11 @@ type UserInfoRes struct {
 // type UserDeleteRes struct {
 // 	// 数据
 // }
+
+type ChangePasswordReq struct {
+	g.Meta `path:"/user/password" tags:"用户(User)" method:"patch" sm:"更新密码"`
+	api.Auth
+	*model.ChangePasswordReq
+}
+
+type ChangePasswordRes struct{}

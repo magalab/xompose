@@ -5,6 +5,21 @@ export type StackList = {
     tags: string[]
 }
 
+export type StackListResp = {
+    items: Array<ListItem>
+}
+
+export type ListItem = StackItem & {
+    isManaged: Boolean
+}
+
+export type StackItem = {
+    id: string
+    stackName: String
+    stackStatus: String
+    yamlContent: String
+}
+
 
 export const UNKNOWN = 0
 export const CREATED_FILE = 1

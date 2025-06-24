@@ -11,6 +11,8 @@ import (
 	"xompose/internal/cmd/middleware"
 	"xompose/internal/controller/login"
 	"xompose/internal/controller/stack"
+	"xompose/internal/controller/system"
+	"xompose/internal/controller/user"
 )
 
 var (
@@ -30,6 +32,8 @@ var (
 				Bind(
 					login.NewV1(),
 					stack.NewV1(),
+					system.NewV1(),
+					user.NewV1(),
 				)
 			s.Run()
 			return nil

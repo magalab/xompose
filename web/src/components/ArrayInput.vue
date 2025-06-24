@@ -1,149 +1,105 @@
 <template>
     <div>
         <div v-if="valid">
-            <ul v-if="isArrayInited" class="list-group">
-                <li v-for="(value, index) in array" :key="index" class="list-group-item">
-                    <input v-model="array[index]" type="text" class="no-bg domain-input" :placeholder="placeholder" />
-                    <font-awesome-icon icon="times" class="action remove ms-2 me-3 text-danger" @click="remove(index)" />
+            <ul v-if="isArrayInitd" class="bg-[#070a10] p-10px pl-0">
+                <li v-for="(_, index) in array" :key="index" class="flex items-center">
+                    <input v-model="array[index]" type="text"
+                        class="bg-transparent flex-grow border-none outline-none color-black bg-[#070a10] placeholder-[#1d2634]"
+                        :placeholder="placeholder" />
+                    <i-lucide-x @click="remove(index)" class="h-16px w-16px" />
                 </li>
             </ul>
 
-            <button class="btn btn-normal btn-sm mt-3" @click="addField">{{ $t("addListItem", [ displayName ]) }}</button>
+            <button class="mt-3" @click="addField">
+                "addListItem", {{ displayName }}
+            </button>
         </div>
         <div v-else>
-            {{ $t("LongSyntaxNotSupported") }}
+            LongSyntaxNotSupported
         </div>
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        name: {
-            type: String,
-            required: true,
-        },
-        placeholder: {
-            type: String,
-            default: "",
-        },
-        displayName: {
-            type: String,
-            required: true,
-        },
-        objectType: {
-            type: String,
-            default: "service",
-        }
+<script setup lang="ts">
+const props = defineProps({
+    name: {
+        type: String,
+        required: true,
     },
-    data() {
-        return {
-
-        };
+    placeholder: {
+        type: String,
+        default: "",
     },
-    computed: {
-        array() {
-            // Create the array if not exists, it should be safe.
-            if (!this.service[this.name]) {
-                return [];
-            }
-            return this.service[this.name];
-        },
-
-        /**
-         * Check if the array is inited before called v-for.
-         * Prevent empty arrays inserted to the YAML file.
-         * @return {boolean}
-         */
-        isArrayInited() {
-            return this.service[this.name] !== undefined;
-        },
-
-        /**
-         * Not a good name, but it is used to get the object.
-         */
-        service() {
-            if (this.objectType === "service") {
-                // Used in Container.vue
-                return this.$parent.$parent.service;
-            } else if (this.objectType === "x-dockge") {
-
-                if (!this.$parent.$parent.jsonConfig["x-dockge"]) {
-                    return {};
-                }
-
-                // Used in Compose.vue
-                return this.$parent.$parent.jsonConfig["x-dockge"];
-            } else {
-                return {};
-            }
-        },
-
-        valid() {
-            // Check if the array is actually an array
-            if (!Array.isArray(this.array)) {
-                return false;
-            }
-
-            // Check if the array contains non-object only.
-            for (let item of this.array) {
-                if (typeof item === "object") {
-                    return false;
-                }
-            }
-            return true;
-        }
-
+    displayName: {
+        type: String,
+        required: true,
     },
-    created() {
-
+    objectType: {
+        type: String,
+        default: "service",
     },
-    methods: {
-        addField() {
+})
 
-            // Create the object if not exists.
-            if (this.objectType === "x-dockge") {
-                if (!this.$parent.$parent.jsonConfig["x-dockge"]) {
-                    this.$parent.$parent.jsonConfig["x-dockge"] = {};
-                }
-            }
-
-            // Create the array if not exists.
-            if (!this.service[this.name]) {
-                this.service[this.name] = [];
-            }
-
-            this.array.push("");
-        },
-        remove(index) {
-            this.array.splice(index, 1);
-        },
+const array = computed(() => {
+    if (!service.value[props.name]) {
+        return [];
     }
-};
-</script>
+    return service.value[props.name];
+})
 
-<style lang="scss" scoped>
-@import "../styles/vars.scss";
 
-.list-group {
-    background-color: $dark-bg2;
 
-    li {
-        display: flex;
-        align-items: center;
-        padding: 10px 0 10px 10px;
+const isArrayInitd = computed(() => {
+    return service.value[props.name] !== undefined;
+})
 
-        .domain-input {
-            flex-grow: 1;
-            background-color: $dark-bg2;
-            border: none;
-            color: $dark-font-color;
-            outline: none;
+const valid = computed(() => {
+    // Check if the array is actually an array
+    if (!Array.isArray(array.value)) {
+        return false;
+    }
 
-            &::placeholder {
-                color: #1d2634;
-            }
+    // Check if the array contains non-object only.
+    for (let item of array.value) {
+        if (typeof item === "object") {
+            return false;
         }
     }
+    return true;
+})
+const service = computed(() => {
+    if (props.objectType === "service") {
+        // Used in Container.vue
+        // return this.$parent.$parent.service;
+    } else if (props.objectType === "x-dockge") {
+
+        // if (!this.$parent.$parent.jsonConfig["x-dockge"]) {
+        //     return {};
+        // }
+
+        // Used in Compose.vue
+        // return this.$parent.$parent.jsonConfig["x-dockge"];
+    } else {
+        return {};
+    }
+})
+
+const addField = () => {
+    if (props.objectType === "x-dockge") {
+        // if (!this.$parent.$parent.jsonConfig["x-dockge"]) {
+        //     this.$parent.$parent.jsonConfig["x-dockge"] = {};
+        // }
+    }
+
+    // Create the array if not exists.
+    if (!service.value[props.name]) {
+        service.value[props.name] = [];
+    }
+
+    array.value.push("");
 }
-</style>
+const remove = (index: number) => {
+    array.value.splice(index, 1);
+}
+
+</script>

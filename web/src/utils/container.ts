@@ -1,3 +1,5 @@
+import { CREATED_STACK, EXITED, RUNNING, UNKNOWN } from "@/types/stack";
+
 export const getContainerExecTerminalName = (
     endpoint: string,
     stackName: string,
@@ -22,7 +24,7 @@ export const getContainerExecTerminalName = (
  * @param input
  * @param hostname
  */
-export const  parseDockerPort = (input : string, hostname : string) => {
+export const parseDockerPort = (input: string, hostname: string) => {
     let port;
     let display;
 
@@ -85,4 +87,17 @@ export const  parseDockerPort = (input : string, hostname : string) => {
         url: protocol + "://" + hostname + ":" + portInt,
         display: display,
     };
+}
+
+
+export const statusConvert = (status: string): number => {
+    if (status.startsWith("created")) {
+        return CREATED_STACK;
+    } else if (status.includes("exited")) {
+        return EXITED;
+    } else if (status.startsWith("running")) {
+        return RUNNING;
+    } else {
+        return UNKNOWN;
+    }
 }

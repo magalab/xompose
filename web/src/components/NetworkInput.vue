@@ -1,37 +1,36 @@
 <template>
     <div>
-        <h5>{{ $t("Internal Networks") }}</h5>
-        <ul class="list-group">
-            <li v-for="(networkRow, index) in networkList" :key="index" class="list-group-item">
-                <input v-model="networkRow.key" type="text" class="no-bg domain-input" :placeholder="$t(`Network name...`)" />
-                <font-awesome-icon icon="times" class="action remove ms-2 me-3 text-danger" @click="remove(index)" />
+        <h5> Internal Networks </h5>
+        <ul >
+            <li v-for="(networkRow, index) in networkList" :key="index" >
+                <input v-model="networkRow.key" type="text"
+                    placeholder="Network name" />
+                <i-lucide-x @click="remove(index)" class="h-16px w-16px" />
             </li>
         </ul>
 
-        <button class="btn btn-normal btn-sm mt-3 me-2" @click="addField">{{ $t("addInternalNetwork") }}</button>
+        <el-button class="mt-3 me-2" @click="addField">addInternalNetwork</el-button>
 
-        <h5 class="mt-3">{{ $t("External Networks") }}</h5>
+        <h5 class="mt-3">External Networks</h5>
 
         <div v-if="externalNetworkList.length === 0">
-            {{ $t("No External Networks") }}
+            No External Networks
         </div>
 
-        <div v-for="(networkName, index) in externalNetworkList" :key="networkName" class="form-check form-switch my-3">
-            <input :id=" 'external-network' + index" v-model="selectedExternalList[networkName]" class="form-check-input" type="checkbox">
+        <div v-for="(networkName, index) in externalNetworkList" :key="networkName" class="my-3">
+            <input :id="'external-network' + index" v-model="selectedExternalList[networkName]" 
+                type="checkbox">
 
-            <label class="form-check-label" :for=" 'external-network' +index">
+            <label :for="'external-network' + index">
                 {{ networkName }}
             </label>
 
-            <span v-if="false" class="text-danger ms-2 delete">Delete</span>
+            <!-- <span v-if="false" class="text-danger ms-2 delete">Delete</span> -->
         </div>
 
-        <div v-if="false" class="input-group mb-3">
-            <input
-                placeholder="New external network name..."
-                class="form-control"
-                @keyup.enter="createExternelNetwork"
-            />
+        <!-- <div v-if="false" class="input-group mb-3">
+            <input placeholder="New external network name..." class="form-control"
+                @keyup.enter="createExternelNetwork" />
             <button class="btn btn-normal btn-sm  me-2" type="button">
                 {{ $t("createExternalNetwork") }}
             </button>
@@ -39,189 +38,151 @@
 
         <div v-if="false">
             <button class="btn btn-primary btn-sm mt-3 me-2" @click="applyToYAML">{{ $t("applyToYAML") }}</button>
-        </div>
+        </div> -->
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            networkList: [],
-            externalList: {},
-            selectedExternalList: {},
-            externalNetworkList: [],
-        };
-    },
-    computed: {
-        jsonConfig() {
-            return this.$parent.$parent.jsonConfig;
-        },
+<script setup lang="ts">
+const networkList = ref([])
+const externalList = ref([])
+const selectedExternalList = ref([])
+const externalNetworkList = ref([])
 
-        stack() {
-            return this.$parent.$parent.stack;
-        },
+const jsonConfig = computed(() => {
+    // return this.$parent.$parent.jsonConfig
+})
 
-        editorFocus() {
-            return this.$parent.$parent.editorFocus;
-        },
+const stack = computed(() => {
+    // return this.$parent.$parent.stack
+})
 
-        endpoint() {
-            return this.$parent.$parent.endpoint;
-        },
-    },
-    watch: {
-        "jsonConfig.networks": {
-            handler() {
-                if (this.editorFocus) {
-                    console.debug("jsonConfig.networks changed");
-                    this.loadNetworkList();
-                }
-            },
-            deep: true,
-        },
+const editorFocus = computed(() => {
+    // return this.$parent.$parent.editorFocus
+})
 
-        "selectedExternalList": {
-            handler() {
-                for (const networkName in this.selectedExternalList) {
-                    const enable = this.selectedExternalList[networkName];
+const endpoint = computed(() => {
+    // return this.$parent.$parent.endpoint
+})
 
-                    if (enable) {
-                        if (!this.externalList[networkName]) {
-                            this.externalList[networkName] = {};
-                        }
-                        this.externalList[networkName].external = true;
-                    } else {
-                        delete this.externalList[networkName];
-                    }
-                }
-                this.applyToYAML();
-            },
-            deep: true,
-        },
+// watch: {
+//     "jsonConfig.networks": {
+//         handler() {
+//             if (this.editorFocus) {
+//                 console.debug("jsonConfig.networks changed")
+//                 this.loadNetworkList()
+//             }
+//         },
+//         deep: true,
+//         },
 
-        "networkList": {
-            handler() {
-                this.applyToYAML();
-            },
-            deep: true,
+//     "selectedExternalList": {
+//         handler() {
+//             for (const networkName in this.selectedExternalList) {
+//                 const enable = this.selectedExternalList[networkName]
+
+//                 if (enable) {
+//                     if (!this.externalList[networkName]) {
+//                         this.externalList[networkName] = {}
+//                     }
+//                     this.externalList[networkName].external = true
+//                 } else {
+//                     delete this.externalList[networkName]
+//                 }
+//             }
+//             this.applyToYAML()
+//         },
+//         deep: true,
+//         },
+
+//     "networkList": {
+//         handler() {
+//             this.applyToYAML()
+//         },
+//         deep: true,
+//         }
+// }
+
+onMounted(() => {
+    loadNetworkList()
+    loadExternalNetworkList()
+})
+
+const loadNetworkList = () => {
+    // let networkList = []
+    // let externalList = {}
+
+    for (const key in jsonConfig.value.networks) {
+        let obj = {
+            key: key,
+            value: jsonConfig.value.networks[key],
         }
 
-    },
-    mounted() {
-        this.loadNetworkList();
-        this.loadExternalNetworkList();
-    },
-    methods: {
-        loadNetworkList() {
-            this.networkList = [];
-            this.externalList = {};
-
-            for (const key in this.jsonConfig.networks) {
-                let obj = {
-                    key: key,
-                    value: this.jsonConfig.networks[key],
-                };
-
-                if (obj.value && obj.value.external) {
-                    this.externalList[key] = Object.assign({}, obj.value);
-                } else {
-                    this.networkList.push(obj);
-                }
-            }
-
-            // Restore selectedExternalList
-            this.selectedExternalList = {};
-            for (const networkName in this.externalList) {
-                this.selectedExternalList[networkName] = true;
-            }
-        },
-
-        loadExternalNetworkList() {
-            this.$root.emitAgent(this.endpoint, "getDockerNetworkList", (res) => {
-                if (res.ok) {
-                    this.externalNetworkList = res.dockerNetworkList.filter((n) => {
-                        // Filter out this stack networks
-                        if (n.startsWith(this.stack.name + "_")) {
-                            return false;
-                        }
-                        // They should be not supported.
-                        // https://docs.docker.com/compose/compose-file/06-networks/#host-or-none
-                        if (n === "none" || n === "host" || n === "bridge") {
-                            return false;
-                        }
-                        return true;
-                    });
-                } else {
-                    this.$root.toastRes(res);
-                }
-            });
-        },
-
-        addField() {
-            this.networkList.push({
-                key: "",
-                value: {},
-            });
-        },
-
-        remove(index) {
-            this.networkList.splice(index, 1);
-            this.applyToYAML();
-        },
-
-        applyToYAML() {
-            if (this.editorFocus) {
-                return;
-            }
-
-            this.jsonConfig.networks = {};
-
-            // Internal networks
-            for (const networkRow of this.networkList) {
-                this.jsonConfig.networks[networkRow.key] = networkRow.value;
-            }
-
-            // External networks
-            for (const networkName in this.externalList) {
-                this.jsonConfig.networks[networkName] = this.externalList[networkName];
-            }
-
-            console.debug("applyToYAML", this.jsonConfig.networks);
+        if (obj.value && obj.value.external) {
+            externalList.value[key] = Object.assign({}, obj.value)
+        } else {
+            networkList.value.push(obj)
         }
+    }
 
-    },
-};
-</script>
+    // Restore selectedExternalList
 
-<style lang="scss" scoped>
-@import "../styles/vars.scss";
-
-.list-group {
-    background-color: $dark-bg2;
-
-    li {
-        display: flex;
-        align-items: center;
-        padding: 10px 0 10px 10px;
-
-        .domain-input {
-            flex-grow: 1;
-            background-color: $dark-bg2;
-            border: none;
-            color: $dark-font-color;
-            outline: none;
-
-            &::placeholder {
-                color: #1d2634;
-            }
-        }
+    for (const networkName in externalList.value) {
+        selectedExternalList.value[networkName] = true
     }
 }
 
-.delete {
-    text-decoration: underline;
-    font-size: 13px;
-    cursor: pointer;
+const loadExternalNetworkList = () => {
+    // TODO api 获取
+    // this.$root.emitAgent(this.endpoint, "getDockerNetworkList", (res) => {
+    //     if (res.ok) {
+    //         this.externalNetworkList = res.dockerNetworkList.filter((n) => {
+    //             // Filter out this stack networks
+    //             if (n.startsWith(this.stack.name + "_")) {
+    //                 return false
+    //             }
+    //             // They should be not supported.
+    //             // https://docs.docker.com/compose/compose-file/06-networks/#host-or-none
+    //             if (n === "none" || n === "host" || n === "bridge") {
+    //                 return false
+    //             }
+    //             return true
+    //         })
+    //     } else {
+    //         this.$root.toastRes(res)
+    //     }
+    // })
 }
-</style>
+
+const addField = () => {
+    networkList.value.push({
+        key: "",
+        value: {},
+    })
+}
+
+const remove = (index: number) => {
+    networkList.value.splice(index, 1)
+    applyToYAML()
+}
+
+const applyToYAML = () => {
+    if (editorFocus.value) {
+        return
+    }
+
+    jsonConfig.value.networks = {}
+
+    // Internal networks
+    for (const networkRow of networkList.value) {
+        jsonConfig.value.networks[networkRow.key] = networkRow.value
+    }
+
+    // External networks
+    for (const networkName in externalList.value) {
+        jsonConfig.value.networks[networkName] = externalList.value[networkName]
+    }
+
+    console.debug("applyToYAML", jsonConfig.value.networks)
+}
+
+</script>

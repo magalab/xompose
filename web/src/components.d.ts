@@ -30,6 +30,8 @@ declare module 'vue' {
     ElText: typeof import('element-plus/es')['ElText']
     General: typeof import('./components/settings/General.vue')['default']
     HiddenInput: typeof import('./components/HiddenInput.vue')['default']
+    IEpDelete: typeof import('~icons/ep/delete')['default']
+    IEpEdit: typeof import('~icons/ep/edit')['default']
     IEpLock: typeof import('~icons/ep/lock')['default']
     IEpLocl: typeof import('~icons/ep/locl')['default']
     IEpPlus: typeof import('~icons/ep/plus')['default']

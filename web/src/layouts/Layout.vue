@@ -1,24 +1,19 @@
 <script setup lang="ts">
-// import { useUserStore } from '@/store/user';
-// import { useRouter } from 'vue-router';
-
-// const router = useRouter()
-// const userStore = useUserStore()
-
-// // 退出登录
-// const confirm = () => {
-//   userStore.clearUserInfo()
-//   router.push('/login')
-// }
+import { loginAPI } from '@/api/user'
 interface Form {
   username: string
   password: string
 }
 
-
-const form = ref < Form > ({} as Form)
-
+const form = ref<Form>({} as Form)
 const isLogin = ref(true)
+const onLogin = async () => {
+  await loginAPI({
+    username: form.value.username,
+    password: form.value.password,
+  })
+  isLogin.value = true
+}
 
 </script>
 
@@ -37,7 +32,7 @@ const isLogin = ref(true)
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item>
-                <router-link to="/settings/general">设置</router-link>
+                <router-link to="/settings/about">设置11111</router-link>
               </el-dropdown-item>
               <el-dropdown-item>
                 退出登录
@@ -47,6 +42,7 @@ const isLogin = ref(true)
         </el-dropdown>
       </div>
     </el-header>
+    <!-- 登录 -->
     <el-main>
       <router-view v-if="isLogin"></router-view>
       <el-container v-else>
@@ -70,7 +66,7 @@ const isLogin = ref(true)
             </el-form-item>
             <el-row justify="end">
               <el-form-item>
-                <el-button type="primary">
+                <el-button type="primary" @click="onLogin">
                   登录
                 </el-button>
               </el-form-item>

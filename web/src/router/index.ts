@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, type RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHashHistory, type RouteRecordRaw } from "vue-router"
 
 const routes: RouteRecordRaw[] = [
     {
@@ -12,11 +12,11 @@ const routes: RouteRecordRaw[] = [
                     {
                         name: "DashboardHome",
                         path: "/",
-                        component:  () => import("@/views/DashboardHome.vue"),
+                        component: () => import("@/views/DashboardHome.vue"),
                         children: [
                             {
                                 path: "/compose",
-                                component:   () =>import("@/views/Compose.vue"),
+                                component: () => import("@/views/Compose.vue"),
                             },
                             {
                                 path: "/compose/:stackName/:endpoint",
@@ -24,16 +24,16 @@ const routes: RouteRecordRaw[] = [
                             },
                             {
                                 path: "/compose/:stackName",
-                                component:  () =>import("@/views/Compose.vue"),
+                                component: () => import("@/views/Compose.vue"),
                             },
                             {
                                 path: "/terminal/:stackName/:serviceName/:type",
-                                component:  () =>import("@/views/ContainerTerminal.vue"),
+                                component: () => import("@/views/ContainerTerminal.vue"),
                                 name: "containerTerminal",
                             },
                             {
                                 path: "/terminal/:stackName/:serviceName/:type/:endpoint",
-                                component:  () => import("@/views/ContainerTerminal.vue"),
+                                component: () => import("@/views/ContainerTerminal.vue"),
                                 name: "containerTerminalEndpoint",
                             },
                         ]
@@ -48,20 +48,12 @@ const routes: RouteRecordRaw[] = [
                     },
                     {
                         path: "/settings",
-                        component:  () =>import("@/views/Settings.vue"),
+                        component: () => import("@/views/Settings.vue"),
                         children: [
                             {
                                 path: "general",
                                 component: () => import("@/components/settings/General.vue"),
                             },
-                            {
-                                path: "appearance",
-                                component: () => import("@/components/settings/Appearance.vue"),
-                            },
-                            // {
-                            //     path: "security",
-                            //     component: import("@/components/settings/Security.vue"),
-                            // },
                             {
                                 path: "about",
                                 component: () => import("@/components/settings/About.vue"),
@@ -76,10 +68,10 @@ const routes: RouteRecordRaw[] = [
         path: "/setup",
         component: () => import("@/views/Setup.vue"),
     },
-    {
-        path: "/:catchAll(.*)",
-        component: () => import("@/views/404.vue"),
-    },
+    // {
+    //     path: "/:catchAll(.*)",
+    //     component: () => import("@/views/404.vue"),
+    // },
 
 ]
 

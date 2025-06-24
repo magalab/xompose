@@ -1,18 +1,20 @@
 <template>
     <div>
         <div v-if="valid">
-            <ul v-if="isArrayInited" class="list-group">
-                <li v-for="(value, index) in array" :key="index" class="list-group-item">
-                    <select v-model="array[index]" class="no-bg domain-input">
+            <ul v-if="isArrayInitd" class="bg-[#070a10] p-10px pl-0">
+                <li v-for="(_, index) in array" :key="index">
+                    <select v-model="array[index]"
+                        class="bg-transparent flex-grow border-none outline-none color-black bg-[#070a10] placeholder-[#1d2634]">
                         <option value="">{{ $t(`Select a network...`) }}</option>
                         <option v-for="option in options" :key="option" :value="option">{{ option }}</option>
                     </select>
-
-                    <font-awesome-icon icon="times" class="action remove ms-2 me-3 text-danger" @click="remove(index)" />
+                    <i-lucide-x @click="remove(index)" class="h-16px w-16px" />
                 </li>
             </ul>
 
-            <button class="btn btn-normal btn-sm mt-3" @click="addField">{{ $t("addListItem", [ displayName ]) }}</button>
+            <button class="mt-3" @click="addField">
+                "addListItem", {{ displayName }}
+            </button>
         </div>
         <div v-else>
             Long syntax is not supported here. Please use the YAML editor.
@@ -20,109 +22,65 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        name: {
-            type: String,
-            required: true,
-        },
-        placeholder: {
-            type: String,
-            default: "",
-        },
-        displayName: {
-            type: String,
-            required: true,
-        },
-        options: {
-            type: Array,
-            required: true,
-        },
+<script setup lang="ts">
+const props = defineProps({
+    name: {
+        type: String,
+        required: true,
     },
-    data() {
-        return {
-
-        };
+    placeholder: {
+        type: String,
+        default: "",
     },
-    computed: {
-        array() {
-            // Create the array if not exists, it should be safe.
-            if (!this.service[this.name]) {
-                return [];
-            }
-            return this.service[this.name];
-        },
-
-        /**
-         * Check if the array is inited before called v-for.
-         * Prevent empty arrays inserted to the YAML file.
-         * @return {boolean}
-         */
-        isArrayInited() {
-            return this.service[this.name] !== undefined;
-        },
-
-        service() {
-            return this.$parent.$parent.service;
-        },
-
-        valid() {
-            // Check if the array is actually an array
-            if (!Array.isArray(this.array)) {
-                return false;
-            }
-
-            // Check if the array contains non-object only.
-            for (let item of this.array) {
-                if (typeof item === "object") {
-                    return false;
-                }
-            }
-            return true;
-        }
-
+    displayName: {
+        type: String,
+        required: true,
     },
-    created() {
-
+    options: {
+        type: Array,
+        required: true,
     },
-    methods: {
-        addField() {
-            // Create the array if not exists.
-            if (!this.service[this.name]) {
-                this.service[this.name] = [];
-            }
-            this.array.push("");
-        },
-        remove(index) {
-            this.array.splice(index, 1);
-        },
+})
+
+const array = computed(() => {
+    if (!service.value[props.name]) {
+        return []
     }
-};
-</script>
+    return service.value[props.name]
+})
 
-<style lang="scss" scoped>
-@import "../styles/vars.scss";
+const isArrayInitd = computed(() => {
+    return service.value[props.name] !== undefined
+})
 
-.list-group {
-    background-color: $dark-bg2;
+const valid = computed(() => {
+    // Check if the array is actually an array
+    if (!Array.isArray(array.value)) {
+        return false;
+    }
 
-    li {
-        display: flex;
-        align-items: center;
-        padding: 10px 0 10px 10px;
-
-        .domain-input {
-            flex-grow: 1;
-            background-color: $dark-bg2;
-            border: none;
-            color: $dark-font-color;
-            outline: none;
-
-            &::placeholder {
-                color: #1d2634;
-            }
+    // Check if the array contains non-object only.
+    for (let item of array.value) {
+        if (typeof item === "object") {
+            return false;
         }
     }
+    return true;
+})
+const service = computed(() => {
+    // return this.$parent.$parent.service
+})
+
+const addField = () => {
+    // Create the array if not exists.
+    if (!service.value[this.name]) {
+        service.value[this.name] = []
+    }
+    array.value.push("")
 }
-</style>
+
+const remove = (index: number) => {
+    array.value.splice(index, 1);
+}
+
+</script>

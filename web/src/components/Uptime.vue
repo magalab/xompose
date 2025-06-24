@@ -1,9 +1,9 @@
 <template>
-    <span :class="className">{{ statusName }}</span>
+    <span :class="className">{{ props.stack.stackStatus }}</span>
 </template>
 
 <script setup lang="ts">
-import { statusColor, statusNameShort } from '@/types/stack'
+import { statusColor } from '@/types/stack'
 
 const props = defineProps({
     stack: {
@@ -16,18 +16,15 @@ const props = defineProps({
     },
 })
 
-// const upTime = computed((): string => {
-//     return "notAvailableShort"
-// })
-
 const color = computed(() => {
     statusColor(props.stack?.status)
 })
 
-const statusName = (() => {
-    // return this.$t(statusNameShort(this.stack?.status));
-    return statusNameShort(props.stack?.status);
-})
+// const statusName = computed (() => {
+//     console.log(props.stack.stackStatus)
+//     return props.stack.stackStatus
+//     // return statusNameShort(props.stack?.status);
+// })
 
 const className = (() => {
     let className = `badge rounded-pill bg-${color}`;
