@@ -47,26 +47,26 @@
     <div class="w-full h-full">
         <div class="h-50% mx-auto w-18% flex flex-col justify-center items-center bg-violet rounded-2xl">
             <img src="@/assets/meow.png" class="w-50px h-50px rounded-50% mb-1">
-            <p class="mb-5">meow</p>
+            <p class="mb-5"> {{ $t("Meow") }}</p>
             <el-form :model="form">
                 <el-form-item>
                     <el-input v-model="form.username" size="large" clearable>
                         <template #prefix>
-                            <i-ep-user class="text-violet"></i-ep-user>
+                            <svg class="i-lucide-user text-xl text-violet"></svg>
                         </template>
                     </el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-input v-model="form.password" type="password" show-password size="large" clearable>
                         <template #prefix>
-                            <i-ep-lock class="text-violet"></i-ep-lock>
+                            <svg class="i-lucide-lock text-violet"></svg>
                         </template>
                     </el-input>
                 </el-form-item>
                 <el-row justify="end">
                     <el-form-item>
                         <el-button type="primary" @click="submit">
-                            登录
+                            {{ $t("Login") }}
                         </el-button>
                     </el-form-item>
                 </el-row>

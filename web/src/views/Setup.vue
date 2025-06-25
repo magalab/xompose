@@ -56,21 +56,21 @@
                 <el-form-item>
                     <el-input v-model="form.username" size="large" clearable>
                         <template #prefix>
-                            <i-ep-user class="text-violet"></i-ep-user>
+                            <svg class="i-lucide-user text-violet"></svg>
                         </template>
                     </el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-input v-model="form.password" type="password" show-password size="large" clearable>
                         <template #prefix>
-                            <i-ep-lock class="text-violet"></i-ep-lock>
+                            <svg class="i-lucide-lock text-violet"></svg>
                         </template>
                     </el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-input v-model="form.password2" type="password" show-password size="large" clearable>
                         <template #prefix>
-                            <i-ep-lock class="text-violet"></i-ep-lock>
+                            <svg class="i-lucide-lock text-violet"></svg>
                         </template>
                     </el-input>
                 </el-form-item>

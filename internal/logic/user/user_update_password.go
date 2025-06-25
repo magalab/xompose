@@ -22,7 +22,7 @@ func (s *sUser) UserChangePassword(ctx context.Context, req *model.ChangePasswor
 	if err = bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(req.CurrentPassword)); err != nil {
 		return gerror.NewCode(gcode.CodeInvalidRequest, "密码不正确")
 	}
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(req.NewPassword), bcrypt.DefaultCost)
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
 	if err != nil {
 		glog.Error(ctx, err)
 		return gerror.NewCode(gcode.CodeInternalError, "")

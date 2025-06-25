@@ -1,29 +1,32 @@
 <template>
     <div>
-        <h5> Internal Networks </h5>
-        <ul >
-            <li v-for="(networkRow, index) in networkList" :key="index" >
-                <input v-model="networkRow.key" type="text"
-                    placeholder="Network name" />
-                <i-lucide-x @click="remove(index)" class="h-16px w-16px" />
+        <h5> {{ $t("Internal Networks") }} </h5>
+        <ul>
+            <li v-for="(networkRow, index) in networkList" :key="index">
+                <el-input v-model="networkRow.key" type="text" :placeholder="$t(`Network name...`)">
+                    <template #suffix>
+                        <svg class="i-lucide-x h-16px w-16px" @click="remove(index)"></svg>
+                    </template>
+                </el-input>
             </li>
         </ul>
 
-        <el-button class="mt-3 me-2" @click="addField">addInternalNetwork</el-button>
+        <el-button class="mt-3 me-2" type="primary" @click="addField">{{ $t("addInternalNetwork") }}</el-button>
 
-        <h5 class="mt-3">External Networks</h5>
+        <h5 class="mt-3"> {{ $t("External Networks") }} </h5>
 
         <div v-if="externalNetworkList.length === 0">
-            No External Networks
+            {{ $t("No External Networks") }}
         </div>
-
-        <div v-for="(networkName, index) in externalNetworkList" :key="networkName" class="my-3">
-            <input :id="'external-network' + index" v-model="selectedExternalList[networkName]" 
-                type="checkbox">
+        <div v-for="(networkName, index) in externalNetworkList" :key="networkName.value" class="my-3">
+            <!-- <input :id="'external-network' + index" v-model="selectedExternalList[networkName]" type="checkbox">
 
             <label :for="'external-network' + index">
                 {{ networkName }}
-            </label>
+            </label> -->
+            <el-switch v-model="selectedExternalList[networkName]" @change="() => onChange(networkName)">
+            </el-switch>
+            <span>{{ networkName }}</span>
 
             <!-- <span v-if="false" class="text-danger ms-2 delete">Delete</span> -->
         </div>
@@ -46,10 +49,17 @@
 const networkList = ref([])
 const externalList = ref([])
 const selectedExternalList = ref([])
-const externalNetworkList = ref([])
+const externalNetworkList = ref<Object[]>([])
 
 const jsonConfig = computed(() => {
     // return this.$parent.$parent.jsonConfig
+
+    return {
+        networks: {
+            "a": {},
+        },
+
+    }
 })
 
 const stack = computed(() => {
@@ -64,43 +74,22 @@ const endpoint = computed(() => {
     // return this.$parent.$parent.endpoint
 })
 
-// watch: {
-//     "jsonConfig.networks": {
-//         handler() {
-//             if (this.editorFocus) {
-//                 console.debug("jsonConfig.networks changed")
-//                 this.loadNetworkList()
-//             }
-//         },
-//         deep: true,
-//         },
+watch(networkList, (newList, oldList) => {
+    console.log(oldList, 234, newList, 123)
+}, { deep: true })
 
-//     "selectedExternalList": {
-//         handler() {
-//             for (const networkName in this.selectedExternalList) {
-//                 const enable = this.selectedExternalList[networkName]
+watch(selectedExternalList, (newList, oldList) => {
+    console.log(oldList, 561, newList, 123)
+}, { deep: true })
 
-//                 if (enable) {
-//                     if (!this.externalList[networkName]) {
-//                         this.externalList[networkName] = {}
-//                     }
-//                     this.externalList[networkName].external = true
-//                 } else {
-//                     delete this.externalList[networkName]
-//                 }
-//             }
-//             this.applyToYAML()
-//         },
-//         deep: true,
-//         },
+watchEffect(() => {
+    console.log(selectedExternalList, 55555)
+    
+})
 
-//     "networkList": {
-//         handler() {
-//             this.applyToYAML()
-//         },
-//         deep: true,
-//         }
-// }
+const onChange = (item) => {
+    console.log(selectedExternalList.value, 861)
+}
 
 onMounted(() => {
     loadNetworkList()
@@ -151,6 +140,7 @@ const loadExternalNetworkList = () => {
     //         this.$root.toastRes(res)
     //     }
     // })
+    return externalNetworkList.value.push(...["default", "compose_default"])
 }
 
 const addField = () => {

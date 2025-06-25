@@ -13,7 +13,8 @@ const request: AxiosInstance = axios.create({
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json'
-    }
+    },
+    withCredentials: true,
 })
 
 // 请求拦截器
@@ -61,7 +62,7 @@ export const http = {
     },
 
     patch<T = any>(url: string, data?: object, config?: AxiosRequestConfig): Promise<T> {
-        return request.put(url, data, config)
+        return request.patch(url, data, config)
     },
 
     delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {

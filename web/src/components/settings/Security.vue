@@ -1,184 +1,71 @@
 <template>
-    <div>
-        <div v-if="settingsLoaded" class="my-4">
+    <div class="w-full h-500px">
+        <div class="my-4">
             <!-- Change Password -->
-            <template v-if="!settings.disableAuth">
-                <p>
-                    {{ $t("Current User") }}: <strong>{{ $root.username }}</strong>
-                    <button v-if="!settings.disableAuth" id="logout-btn" class="btn btn-danger ms-4 me-2 mb-2"
-                        @click="$root.logout">{{ $t("Logout") }}</button>
-                </p>
+            <p>
+                {{ $t("Current User") }}: <strong> xiaolua </strong>
+            </p>
 
-                <h5 class="my-4 settings-subheading">{{ $t("Change Password") }}</h5>
-                <form class="mb-3" @submit.prevent="savePassword">
-                    <div class="mb-3">
-                        <label for="current-password" class="form-label">
-                            {{ $t("Current Password") }}
-                        </label>
-                        <input id="current-password" v-model="password.currentPassword" type="password"
-                            class="form-control" autocomplete="current-password" required />
+            <h5 class="my-4 settings-subheading">{{ $t("Change Password") }}</h5>
+            <el-form class="mb-3">
+                <el-form-item class="mb-3">
+                    <label for="current-password" class="form-label">
+                        {{ $t("Current Password") }}
+                    </label>
+                    <el-input v-model="formRef.currentPassword" type="password" show-password />
+                </el-form-item>
+
+                <el-form-item class="mb-3">
+                    <label for="new-password" class="form-label">
+                        {{ $t("New Password") }}
+                    </label>
+                    <el-input v-model="formRef.password" type="password" show-password />
+                </el-form-item>
+                <el-form-item class="mb-3">
+                    <label for="repeat-new-password" class="form-label">
+                        {{ $t("Repeat New Password") }}
+                    </label>
+                    <el-input v-model="formRef.password2" type="password" show-password />
+                    <div class="color-red" v-if="invalidPassword">
+                        {{ $t("PasswordNotMatchMsg") }}
                     </div>
-
-                    <div class="mb-3">
-                        <label for="new-password" class="form-label">
-                            {{ $t("New Password") }}
-                        </label>
-                        <input id="new-password" v-model="password.newPassword" type="password" class="form-control"
-                            autocomplete="new-password" required />
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="repeat-new-password" class="form-label">
-                            {{ $t("Repeat New Password") }}
-                        </label>
-                        <input id="repeat-new-password" v-model="password.repeatNewPassword" type="password"
-                            class="form-control" :class="{ 'is-invalid': invalidPassword }" autocomplete="new-password"
-                            required />
-                        <div class="invalid-feedback">
-                            {{ $t("passwordNotMatchMsg") }}
-                        </div>
-                    </div>
-
-                    <div>
-                        <button class="btn btn-primary" type="submit">
-                            {{ $t("Update Password") }}
-                        </button>
-                    </div>
-                </form>
-            </template>
-
-            <!-- TODO: Hidden for now -->
-            <div v-if="!settings.disableAuth && false" class="mt-5 mb-3">
-                <h5 class="my-4 settings-subheading">
-                    {{ $t("Two Factor Authentication") }}
-                </h5>
-                <div class="mb-4">
-                    <button class="btn btn-primary me-2" type="button" @click="$refs.TwoFADialog.show()">
-                        {{ $t("2FA Settings") }}
-                    </button>
-                </div>
-            </div>
-
-            <div class="my-4">
-                <!-- Advanced -->
-                <h5 class="my-4 settings-subheading">{{ $t("Advanced") }}</h5>
-
-                <div class="mb-4">
-                    <button v-if="settings.disableAuth" id="enableAuth-btn" class="btn btn-outline-primary me-2 mb-2"
-                        @click="enableAuth">{{ $t("Enable Auth") }}</button>
-                    <button v-if="!settings.disableAuth" id="disableAuth-btn" class="btn btn-primary me-2 mb-2"
-                        @click="confirmDisableAuth">{{ $t("Disable Auth") }}</button>
-                </div>
-            </div>
+                </el-form-item>
+                <el-button type="primary" @click="savePassword">
+                    {{ $t("Update Password") }}
+                </el-button>
+            </el-form>
         </div>
-
-        <TwoFADialog ref="TwoFADialog" />
-
-        <Confirm ref="confirmDisableAuth" btn-style="btn-danger" :yes-text="$t('I understand, please disable')"
-            :no-text="$t('Leave')" @yes="disableAuth">
-            <!-- eslint-disable-next-line vue/no-v-html -->
-            <p v-html="$t('disableauth.message1')"></p>
-            <!-- eslint-disable-next-line vue/no-v-html -->
-            <p v-html="$t('disableauth.message2')"></p>
-            <p>{{ $t("Please use this option carefully!") }}</p>
-
-            <div class="mb-3">
-                <label for="current-password2" class="form-label">
-                    {{ $t("Current Password") }}
-                </label>
-                <input id="current-password2" v-model="password.currentPassword" type="password" class="form-control"
-                    required />
-            </div>
-        </Confirm>
     </div>
 </template>
 
 <script setup lang="ts">
-
-import Confirm from "../../components/Confirm.vue";
-import TwoFADialog from "../../components/TwoFADialog.vue";
-
+import { changePasswordAPI } from "@/api/user";
 const invalidPassword = ref(false)
 
+const {t} = useI18n()
 interface Form {
-    username: string
     currentPassword: string
-    newPassword: string
-    newPassword2: string
+    password: string
+    password2: string
 }
 
 const formRef = ref<Form>({} as Form)
 
-const savePassword = () => {
-    if (formRef.value.newPassword !== formRef.value.newPassword2) {
+const savePassword = async () => {
+    console.log(formRef.value, 123)
+    if (formRef.value.password !== formRef.value.password2) {
         invalidPassword.value = true;
+        return
     } else {
-        this.$root
-            .getSocket()
-            .emit("changePassword", this.password, (res) => {
-                this.$root.toastRes(res);
-                if (res.ok) {
-                    this.password.currentPassword = "";
-                    this.password.newPassword = "";
-                    this.password.repeatNewPassword = "";
-                }
-            })
+        await changePasswordAPI({
+            currentPassword: formRef.value.currentPassword,
+            password: formRef.value.password,
+            password2: formRef.value.password2,
+        })
+        ElMessage.success(t("PasswordUpdatedSuccessfully"))
+        formRef.value.currentPassword = ""
+        formRef.value.password = ""
+        formRef.value.password2 = ""
     }
 }
-
-// watch: {
-//     "password.repeatNewPassword"() {
-//         this.invalidPassword = false;
-//     },
-// },
-
-export default {
-    // computed: {
-    //     settings() {
-    //         return this.$parent.$parent.$parent.settings;
-    //     },
-    //     saveSettings() {
-    //         return this.$parent.$parent.$parent.saveSettings;
-    //     },
-    //     settingsLoaded() {
-    //         return this.$parent.$parent.$parent.settingsLoaded;
-    //     }
-    // },
-
-
-
-    methods: {
-        /** Check new passwords match before saving them */
-        savePassword() {
-
-        },
-
-        /** Disable authentication for web app access */
-        disableAuth() {
-            this.settings.disableAuth = true;
-
-            // Need current password to disable auth
-            // Set it to empty if done
-            this.saveSettings(() => {
-                this.password.currentPassword = "";
-                this.$root.username = null;
-                this.$root.socketIO.token = "autoLogin";
-            }, this.password.currentPassword);
-        },
-
-        /** Enable authentication for web app access */
-        enableAuth() {
-            this.settings.disableAuth = false;
-            this.saveSettings();
-            this.$root.storage().removeItem("token");
-            location.reload();
-        },
-
-        /** Show confirmation dialog for disable auth */
-        confirmDisableAuth() {
-            this.$refs.confirmDisableAuth.show();
-        },
-
-    },
-};
 </script>

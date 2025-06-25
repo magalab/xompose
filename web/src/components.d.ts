@@ -25,8 +25,11 @@ declare module 'vue' {
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElMain: typeof import('element-plus/es')['ElMain']
+    ElOption: typeof import('element-plus/es')['ElOption']
     ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
     ElRow: typeof import('element-plus/es')['ElRow']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
+    ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElText: typeof import('element-plus/es')['ElText']
     General: typeof import('./components/settings/General.vue')['default']
     HiddenInput: typeof import('./components/HiddenInput.vue')['default']
@@ -47,5 +50,6 @@ declare module 'vue' {
     Terminal: typeof import('./components/Terminal.vue')['default']
     TwoFADialog: typeof import('./components/TwoFADialog.vue')['default']
     Uptime: typeof import('./components/Uptime.vue')['default']
+    YamlEditor: typeof import('./components/YamlEditor.vue')['default']
   }
 }

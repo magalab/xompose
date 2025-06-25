@@ -15,24 +15,24 @@ const routes: RouteRecordRaw[] = [
                         component: () => import("@/views/DashboardHome.vue"),
                         children: [
                             {
-                                path: "/compose",
+                                path: "compose",
                                 component: () => import("@/views/Compose.vue"),
                             },
                             {
-                                path: "/compose/:stackName/:endpoint",
+                                path: "compose/:stackName/:endpoint",
                                 component: () => import("@/views/Compose.vue"),
                             },
                             {
-                                path: "/compose/:stackName",
+                                path: "compose/:stackName",
                                 component: () => import("@/views/Compose.vue"),
                             },
                             {
-                                path: "/terminal/:stackName/:serviceName/:type",
+                                path: "terminal/:stackName/:serviceName/:type",
                                 component: () => import("@/views/ContainerTerminal.vue"),
                                 name: "containerTerminal",
                             },
                             {
-                                path: "/terminal/:stackName/:serviceName/:type/:endpoint",
+                                path: "terminal/:stackName/:serviceName/:type/:endpoint",
                                 component: () => import("@/views/ContainerTerminal.vue"),
                                 name: "containerTerminalEndpoint",
                             },
@@ -57,6 +57,10 @@ const routes: RouteRecordRaw[] = [
                             {
                                 path: "about",
                                 component: () => import("@/components/settings/About.vue"),
+                            },
+                            {
+                                path: "security",
+                                component: () => import("@/components/settings/Security.vue"),
                             },
                         ]
                     },

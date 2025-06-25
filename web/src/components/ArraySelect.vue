@@ -8,13 +8,13 @@
                         <option value="">{{ $t(`Select a network...`) }}</option>
                         <option v-for="option in options" :key="option" :value="option">{{ option }}</option>
                     </select>
-                    <i-lucide-x @click="remove(index)" class="h-16px w-16px" />
+                    <svg class="i-lucide-x h-16px w-16px" @click="remove(index)" ></svg>
                 </li>
             </ul>
 
-            <button class="mt-3" @click="addField">
-                "addListItem", {{ displayName }}
-            </button>
+            <el-button class="mt-3" type="primary" @click="addField">
+               {{ $t("addListItem", [ displayName ]) }}
+            </el-button>
         </div>
         <div v-else>
             Long syntax is not supported here. Please use the YAML editor.
@@ -69,6 +69,13 @@ const valid = computed(() => {
 })
 const service = computed(() => {
     // return this.$parent.$parent.service
+     return {
+        "ports": [],
+        "networks": [],
+        "depends_on": [],
+        "environment": [],
+        "volumes": [],
+    }
 })
 
 const addField = () => {

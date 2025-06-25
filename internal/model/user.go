@@ -38,7 +38,7 @@ func (m *UserModel) ToItem() *UserItem {
 
 type ChangePasswordReq struct {
 	CurrentPassword string `v:"required#请输入旧密码" json:"currentPassword" dc:"旧密码"`
-	NewPassword     string `v:"password2#密码不符合要求" json:"newPassword" dc:"新密码"`
-	NewPassword2    string `v:"password2|same:NewPassword#二次密码不一致" json:"newPassword2" dc:"确认密码"`
+	Password        string `v:"password2#密码不符合要求" json:"password" dc:"新密码"`
+	Password2       string `v:"password2|same:Password#二次密码不一致" json:"password2" dc:"确认密码"`
 	Id              int    `json:"-"`
 }

@@ -9,7 +9,7 @@ export const loginAPI = (data: { username: string, password: string }) => {
     )
 }
 
-export const changePassword = (data: {password: string, password2: string}) => {
+export const changePasswordAPI = (data: {currentPassword: string, password: string, password2: string}) => {
     return http.patch<Response>(
         '/user/password',
         data,

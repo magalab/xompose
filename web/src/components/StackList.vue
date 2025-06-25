@@ -4,7 +4,7 @@
             <div class="flex justify-between items-center">
                 <div class="placeholder"></div>
                 <div class="flex items-center justify-center">
-                    <i-ep-search class="p-1px text-white" />
+                    <svg class="i-lucide-search p-1px text-black"></svg>
                     <div></div>
                     <el-input v-model="searchText" clearable class="w-150px! ml-2px" />
                 </div>

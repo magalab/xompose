@@ -1,21 +1,27 @@
 <template>
     <div>
         <div v-if="valid">
-            <ul v-if="isArrayInitd" class="bg-[#070a10] p-10px pl-0">
+            <!-- <ul v-if="isArrayInitd" class="p-10px pl-0"> -->
+            <ul class="p-10px pl-0">
                 <li v-for="(_, index) in array" :key="index" class="flex items-center">
-                    <input v-model="array[index]" type="text"
-                        class="bg-transparent flex-grow border-none outline-none color-black bg-[#070a10] placeholder-[#1d2634]"
-                        :placeholder="placeholder" />
-                    <i-lucide-x @click="remove(index)" class="h-16px w-16px" />
+                    <el-input v-model="array[index]" type="text"
+                        class="bg-transparent flex-grow color-black bg-[#070a10] placeholder-[#1d2634]"
+                        :placeholder="placeholder">
+                        <template #suffix>
+                            <svg class="i-lucide-x h-16px w-16px" @click="remove(index)"></svg>
+                        </template>
+                        <!-- /> -->
+                    </el-input> 
+                        
                 </li>
             </ul>
 
-            <button class="mt-3" @click="addField">
-                "addListItem", {{ displayName }}
-            </button>
+            <el-button class="mt-3" @click="addField" type="primary">
+                {{ $t("addListItem", [ displayName ]) }}
+            </el-button>
         </div>
         <div v-else>
-            LongSyntaxNotSupported
+            {{ $t("LongSyntaxNotSupported") }}
         </div>
     </div>
 </template>
@@ -49,11 +55,12 @@ const array = computed(() => {
 
 
 
-const isArrayInitd = computed(() => {
-    return service.value[props.name] !== undefined;
-})
+// const isArrayInitd = computed(() => {
+//     return service.value[props.name] !== undefined;
+// })
 
 const valid = computed(() => {
+
     // Check if the array is actually an array
     if (!Array.isArray(array.value)) {
         return false;
@@ -67,7 +74,15 @@ const valid = computed(() => {
     }
     return true;
 })
+
 const service = computed(() => {
+    return {
+        "ports": ["8080/80"],
+        "networks": [],
+        "depends_on": [],
+        "environment": [],
+        "volumes": [],
+    }
     if (props.objectType === "service") {
         // Used in Container.vue
         // return this.$parent.$parent.service;
@@ -93,10 +108,11 @@ const addField = () => {
 
     // Create the array if not exists.
     if (!service.value[props.name]) {
-        service.value[props.name] = [];
+        service.value[props.name] = []
     }
 
-    array.value.push("");
+    array.value.push("")
+    console.log(array.value, 1231414312)
 }
 const remove = (index: number) => {
     array.value.splice(index, 1);

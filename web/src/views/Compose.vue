@@ -1,67 +1,66 @@
 <template>
     <transition name="slide-fade" appear>
         <div>
-            <h1 v-if="isAdd" class="mb-3"> compose </h1>
+            <h1 v-if="isAdd" class="mb-3 text-xl fw-700"> Compose </h1>
             <h1 v-else class="mb-3">
                 <Uptime :stack="globalStack" :pill="true" /> {{ stack.name }}
             </h1>
 
-            <div v-if="stack.isManagedByDockge" class="mb-3">
+            <div v-if="stack.isManaged" class="mb-3">
                 <div class="btn-group me-2" role="group">
                     <button v-if="isEditMode" class="btn btn-primary" :disabled="processing" @click="deployStack">
-                        <i-lucide-rocket />
-                        <!-- {{ $t("deployStack") }} -->
-                        部署
+                        <svg class="i-lucide-rocket"></svg>
+                        {{ $t("deployStack") }}
                     </button>
 
                     <button v-if="isEditMode" class="btn btn-normal" :disabled="processing" @click="saveStack">
-                        <i-lucide-save />
-                        保存
+                        <svg class="i-lucide-save"></svg>
+                        {{ $t("saveStackDraft") }}
                     </button>
 
                     <button v-if="!isEditMode" class="btn btn-secondary" :disabled="processing" @click="enableEditMode">
-                        <i-lucide-edit />
-                        编辑
+                        <svg class="i-lucide-edit"></svg>
+                        {{ $t("editStack") }}
                     </button>
 
                     <button v-if="!isEditMode && !active" class="btn btn-primary" :disabled="processing"
                         @click="startStack">
-                        <i-lucide-play />
-                        开启
+                        <svg class="i-lucide-play"></svg>
+                        {{ $t("startStack") }}
                     </button>
 
                     <button v-if="!isEditMode && active" class="btn btn-normal " :disabled="processing"
                         @click="restartStack">
-                        <i-lucide-refresh-ccw />
-                        重启
+                        <svg class="i-lucide-refresh-ccw"></svg>
+                        {{ $t("restartStack") }}
                     </button>
 
                     <button v-if="!isEditMode" class="btn btn-normal" :disabled="processing" @click="updateStack">
-                        <i-lucide-refresh-ccw />
-                        更新
+                        <svg class="i-lucide-refresh-ccw"></svg>
+                        {{ $t("updateStack") }}
                     </button>
 
                     <button v-if="!isEditMode && active" class="btn btn-normal" :disabled="processing"
                         @click="stopStack">
-                        <i-lucide-circle-stop />
-                        停止
+                        <svg class="i-lucide-circle-stop"></svg>
+                        {{ $t("stopStack") }}
                     </button>
 
-                    <BDropdown right text="" variant="normal">
+                    <!-- <BDropdown right text="" variant="normal">
                         <BDropdownItem @click="downStack">
                             <font-awesome-icon icon="stop" class="me-1" />
                             {{ $t("downStack") }}
                         </BDropdownItem>
-                    </BDropdown>
+                    </BDropdown> -->
                 </div>
 
                 <button v-if="isEditMode && !isAdd" class="btn btn-normal" :disabled="processing" @click="discardStack">
-                    放弃
+                    {{ $t("discardStack") }}
                 </button>
                 <button v-if="!isEditMode" class="btn btn-danger" :disabled="processing"
                     @click="showDeleteDialog = !showDeleteDialog">
-                    <i-lucide-trash />
-                    删除
+                    <svg class="i-lucide-trash"></svg>
+                    {{ $t("deleteStack") }}
                 </button>
             </div>
 
@@ -73,95 +72,82 @@
             </div>
 
             <!-- Progress Terminal -->
-            <transition name="slide-fade" appear>
+            <!-- <transition name="slide-fade" appear>
                 <Terminal v-show="showProgressTerminal" ref="progressTerminal" class="mb-3 h-200px" :name="terminalName"
                     :endpoint="endpoint" :rows="progressTerminalRows">
-                    <!-- TODO -->
-                    <!-- @has-data="showProgressTerminal = true submitted = true"> -->
                 </Terminal>
-            </transition>
+            </transition> -->
 
-            <div v-if="stack.isManagedByDockge" class="row">
-                <div class="col-lg-6">
+            <div v-if="stack.isManaged" class="flex flex-row">
+                <div class="lg:w-1/2">
                     <!-- General -->
                     <div v-if="isAdd">
-                        <h4 class="mb-3">{{ $t("general") }}</h4>
-                        <div class="shadow-box big-padding mb-3">
+                        <h4 class="mb-3">{{ $t("General") }}</h4>
+                        <div class="shadow-[0_15px_70px_rgba(0,0,0,0.1)] rounded-lg p-4 mb-3 ">
                             <!-- Stack Name -->
                             <div>
-                                <label for="name" class="form-label">{{ $t("stackName") }}</label>
-                                <input id="name" v-model="stack.name" type="text" class="form-control" required
-                                    @blur="stackNameToLowercase">
-                                <div class="form-text">{{ $t("Lowercase only") }}</div>
-                            </div>
-
-                            <!-- Endpoint -->
-                            <div class="mt-3">
-                                <label for="name" class="form-label">{{ $t("dockgeAgent") }}</label>
-                                <select v-model="stack.endpoint" class="form-select">
-                                    <option v-for="(agent, endpoint) in $root.agentList" :key="endpoint"
-                                        :value="endpoint" :disabled="$root.agentStatusList[endpoint] != 'online'">
-                                        ({{ $root.agentStatusList[endpoint] }}) {{ (endpoint) ? endpoint :
-                                            $t("currentEndpoint") }}
-                                    </option>
-                                </select>
+                                <label for="name">{{ $t("stackName") }}</label>
+                                <el-input v-model="stack.stackName" type="text" @blur="stackNameToLowercase"
+                                    class="[&_.el-input\_\_wrapper]:rounded-5">
+                                </el-input>
+                                <div class="text-sm color-gray">
+                                    {{ $t("Lowercase only") }}
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Containers -->
-                    <h4 class="mb-3">{{ $tc("container", 2) }}</h4>
-
-                    <div v-if="isEditMode" class="input-group mb-3">
-                        <input v-model="newContainerName" :placeholder="$t(`New Container Name...`)"
-                            class="form-control" @keyup.enter="addContainer" />
-                        <button class="btn btn-primary" @click="addContainer">
+                    <!-- <h4 class="mb-3">{{ $tc("container", 2) }}</h4> -->
+                    <h4 class="mb-3">{{ $t("container") }}</h4>
+                    <div v-if="isEditMode" class="flex mb-3">
+                        <el-input v-model="newContainerName" :placeholder="$t(`New Container Name...`)"
+                            class="[&_.el-input\_\_wrapper]:rounded-l-5 [&_.el-input\_\_wrapper]:rounded-r-0" />
+                        <el-button type="primary" @click="addContainer" class="rounded-l-0! rounded-r-5!">
                             {{ $t("addContainer") }}
-                        </button>
+                        </el-button>
                     </div>
-
                     <div ref="containerList">
-                        <Container v-for="(service, name) in jsonConfig.services" :key="name" :name="name"
+                        <Container v-for="(_, name) in jsonConfig.services" :key="name" :name="name"
                             :is-edit-mode="isEditMode" :first="name === Object.keys(jsonConfig.services)[0]"
-                            :status="serviceStatusList[name]" />
+                            :status="serviceStatusList[name]">
+                        </Container>
                     </div>
 
-                    <button
+                    <!-- <el-button
                         v-if="false && isEditMode && jsonConfig.services && Object.keys(jsonConfig.services).length > 0"
-                        class="btn btn-normal mb-3" @click="addContainer">{{ $t("addContainer") }}</button>
+                        class="btn btn-normal mb-3" @click="addContainer">
+                        {{ $t("addContainer") }}
+                    </el-button> -->
 
                     <!-- General -->
-                    <div v-if="isEditMode">
+                    <!-- 额外 -->
+                    <!-- <div v-if="isEditMode">
                         <h4 class="mb-3">{{ $t("extra") }}</h4>
-                        <div class="shadow-box big-padding mb-3">
-                            <!-- URLs -->
+                        <div class="p-4 mb-3">
                             <div class="mb-4">
-                                <label class="form-label">
-                                    {{ $tc("url", 2) }}
-                                </label>
+                                <label>{{ $t("url") }}</label>
                                 <ArrayInput name="urls" :display-name="$t('url')" placeholder="https://"
-                                    object-type="x-dockge" />
+                                    object-type="x-dockge" >
+                                </ArrayInput>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Combined Terminal Output -->
-                    <div v-show="!isEditMode">
+                    <!-- <div v-show="!isEditMode">
                         <h4 class="mb-3"> 终端 </h4>
                         <Terminal ref="combinedTerminal" class="mb-3 h-200px" :name="combinedTerminalName"
                             :endpoint="endpoint" :rows="combinedTerminalRows" :cols="combinedTerminalCols"
                             style="height: 315px">
                         </Terminal>
-                    </div>
+                    </div> -->
                 </div>
-                <div class="col-lg-6">
+                <div class="lg:w-1/2">
                     <h4 class="mb-3">{{ stack.composeFileName }}</h4>
-
                     <!-- YAML editor -->
                     <div class="mb-3" :class="{ 'edit-mode': isEditMode }">
-                        <prism-editor ref="editor" v-model="stack.composeYAML" class="yaml-editor"
-                            :highlight="highlighterYAML" line-numbers :readonly="!isEditMode" @input="yamlCodeChange"
-                            @focus="editorFocus = true" @blur="editorFocus = false"></prism-editor>
+                        <YamlEditor v-model="stack.composeYAML" class="max-h-400px"></YamlEditor>
                     </div>
                     <div v-if="isEditMode" class="mb-3">
                         {{ yamlError }}
@@ -171,9 +157,7 @@
                     <div v-if="isEditMode">
                         <h4 class="mb-3">.env</h4>
                         <div class="mb-3" :class="{ 'edit-mode': isEditMode }">
-                            <prism-editor ref="editor" v-model="stack.composeENV" class="env-editor"
-                                :highlight="highlighterENV" line-numbers :readonly="!isEditMode"
-                                @focus="editorFocus = true" @blur="editorFocus = false"></prism-editor>
+                            <YamlEditor v-model="stack.composeENV"></YamlEditor>
                         </div>
                     </div>
 
@@ -186,7 +170,7 @@
                         </div> -->
 
                         <!-- Networks -->
-                        <h4 class="mb-3">{{ $tc("network", 2) }}</h4>
+                        <h4 class="mb-3">{{ $t("Network", 2) }}</h4>
                         <div class="shadow-box big-padding mb-3">
                             <NetworkInput />
                         </div>
@@ -203,8 +187,8 @@
                 </div>
             </div>
 
-            <div v-if="!stack.isManagedByDockge && !processing">
-                {{ $t("stackNotManagedByDockgeMsg") }}
+            <div v-if="!stack.isManaged && !processing">
+                {{ $t("stackNotManaged") }}
             </div>
 
             <!-- Delete Dialog -->
@@ -215,14 +199,7 @@
     </transition>
 </template>
 
-<script>
-import { highlight, languages } from "prismjs/components/prism-core"
-import { PrismEditor } from "vue-prism-editor"
-import "prismjs/components/prism-yaml"
-import { parseDocument, Document } from "yaml"
-
-import "prismjs/themes/prism-tomorrow.css"
-import "vue-prism-editor/dist/prismeditor.min.css"
+<script setup lang="ts">
 import {
     COMBINED_TERMINAL_COLS,
     COMBINED_TERMINAL_ROWS,
@@ -234,9 +211,16 @@ import NetworkInput from "../components/NetworkInput.vue"
 import dotenv from "dotenv"
 import { envSubstYAML, yamlToJSON, copyYAMLComments } from "@/utils/yaml"
 import { RUNNING } from "@/types/stack"
+import YamlEditor from "@/components/YamlEditor.vue"
+// onBeforeRouteUpdate((to, from, next) => {
+//     exitConfirm(next)
+// })
 
-const defaultTemplate = `
-services:
+// onBeforeRouteLeave((to, from, next) => {
+//     exitConfirm(next)
+// })
+
+const defaultTemplate = `services:
   nginx:
     image: nginx:latest
     restart: unless-stopped
@@ -248,25 +232,15 @@ const defaultEnv = "# VARIABLE=value #comment"
 let yamlErrorTimeout = null
 
 let serviceStatusTimeout = null
-let prismjsSymbolDefinition = {
-    "symbol": {
-        pattern: /(?<!\$)\$(\{[^{}]*\}|\w+)/,
-    }
-}
 
 const route = useRoute()
 
 const isEditMode = ref(false)
 
-onBeforeRouteUpdate((to, from, next) => {
-    exitConfirm(next)
-})
 
-onBeforeRouteLeave((to, from, next) => {
-    exitConfirm(next)
-})
 
 const exitConfirm = (next) => {
+    console.log(next, isEditMode.value, 1231231)
     if (isEditMode.value) {
         if (confirm("退出")) {
             exitAction()
@@ -280,12 +254,21 @@ const exitConfirm = (next) => {
     }
 }
 
-const stack = ref({})
+interface Stack {
+    stackName: string,
+    composeFileName: string,
+    stackStatus: string,
+    composeYAML: string,
+    isManaged: boolean,
+    composeENV: string,
+    endpoint: string,
+}
+
+const stack = ref<Stack>({} as Stack)
 
 const stopServiceStatusTimeout = ref(false)
 
 const exitAction = () => {
-    console.log("exitAction")
     stopServiceStatusTimeout.value = true
     clearTimeout(serviceStatusTimeout)
 
@@ -303,21 +286,15 @@ const startServiceStatusTimeout = () => {
 
 const submitted = ref(false)
 
+// 是否新增
 const isAdd = computed(() => {
-    console.log(route.path, 123)
-    // this.$route.path === "/compose" && !this.submitted
     return route.path === "/compose" && !submitted.value
 })
 
-console.log(isAdd.value, 123)
 const processing = ref(true)
 
-// onBeforeMount(() => {
-//     console.log(23)
-// })
 
 onMounted(() => {
-    console.log(123321)
     if (isAdd.value) {
         processing.value = false
         isEditMode.value = true
@@ -340,7 +317,9 @@ onMounted(() => {
 
         // Default Values
         stack.value = {
-            name: "",
+            stackName: "",
+            stackStatus: "running(1)",
+            composeFileName: "",
             composeYAML,
             composeENV,
             isManaged: true,
@@ -350,7 +329,8 @@ onMounted(() => {
         yamlCodeChange()
 
     } else {
-        stack.value.stackName = route.params.stackName
+        // console.log(route.params)
+        stack.value.stackName = route.params.stackName[0]
         loadStack()
     }
 
@@ -411,12 +391,12 @@ const deployStack = () => {
     let serviceNameList = Object.keys(jsonConfig.value.services)
 
     // Set the stack name if empty, use the first container name
-    if (stack.value.stackNamename && serviceNameList.length > 0) {
+    if (stack.value.stackName && serviceNameList.length > 0) {
         let serviceName = serviceNameList[0]
         let service = jsonConfig.value.services[serviceName]
 
         if (service && service.container_name) {
-            stack.value.stackNamename = service.container_name
+            stack.value.stackName = service.container_name
         } else {
             stack.value.stackName = serviceName
         }
@@ -456,7 +436,7 @@ const startStack = () => {
 }
 
 const stopStack = () => {
-    processing = true
+    processing.value = true
 
     // TODO 
     // this.$root.emitAgent(this.endpoint, "stopStack", this.stack.name, (res) => {
@@ -516,7 +496,7 @@ const discardStack = () => {
 const yamlDoc = ref({})
 const yamlError = ref("")
 
-const envSubstJsonConfig = ref({})
+const envSubstJSONConfig = ref({})
 
 const jsonConfig = ref({})
 const editorFocus = ref(false)
@@ -588,48 +568,6 @@ const yamlCodeChange = () => {
 //         deep: true,
 //         },
 
-// },
-
-const highlighterYAML = (code) => {
-    if (!languages.yaml_with_symbols) {
-        languages.yaml_with_symbols = languages.insertBefore("yaml", "punctuation", {
-            "symbol": prismjsSymbolDefinition["symbol"]
-        })
-    }
-    return highlight(code, languages.yaml_with_symbols)
-}
-
-const highlighterENV = (code) => {
-    if (!languages.docker_env) {
-        languages.docker_env = {
-            "comment": {
-                pattern: /(^#| #).*$/m,
-                greedy: true
-            },
-            "keyword": {
-                pattern: /^\w*(?=[:=])/m,
-                greedy: true
-            },
-            "value": {
-                pattern: /(?<=[:=]).*?((?= #)|$)/m,
-                greedy: true,
-                inside: {
-                    "string": [
-                        {
-                            pattern: /^ *'.*?(?<!\\)'/m,
-                        },
-                        {
-                            pattern: /^ *".*?(?<!\\)"|^.*$/m,
-                            inside: prismjsSymbolDefinition
-                        },
-                    ],
-                },
-            },
-        }
-    }
-    return highlight(code, languages.docker_env)
-}
-
 const stackNameToLowercase = () => {
     stack.value.stackName = stack.value.stackName.toLowerCase()
 }
@@ -664,10 +602,11 @@ const bindTerminal = () => {
 
 const globalStack = computed(() => {
     // return this.$root.completeStackList[this.stack.name + "_" + this.endpoint]
+    return stack
 })
 
 const status = computed(() => {
-    return globalStack?.status
+    return globalStack?.value.stackStatus
 })
 
 const active = computed(() => {
@@ -675,17 +614,17 @@ const active = computed(() => {
 })
 
 const terminalName = computed(() => {
-    if (!stack.stackName) {
+    if (!stack.value.stackName) {
         return ""
     }
-    return getComposeTerminalName(endpoint.value, stack.stackName)
+    return getComposeTerminalName(endpoint.value, stack.value.stackName)
 })
 
 const combinedTerminalName = computed(() => {
-    if (!stack.stackName) {
+    if (!stack.value.stackName) {
         return ""
     }
-    return getCombinedTerminalName(endpoint.value, stack.stackName)
+    return getCombinedTerminalName(endpoint.value, stack.value.stackName)
 })
 
 const networks = computed(() => {
@@ -693,18 +632,19 @@ const networks = computed(() => {
 })
 
 const endpoint = computed(() => {
-    return stack.value.endpoint || router.params.endpoint || ""
+    return stack.value.endpoint || route.params.endpoint || ""
 })
 
 const url = computed(() => {
     if (stack.value.endpoint) {
-        return `/compose/${stack.stackNamename}/${stack.value.endpoint}`
+        return `/compose/${stack.value.stackName}/${stack.value.endpoint}`
     } else {
         return `/compose/${stack.value.stackName}`
     }
 })
 
 const urls = computed(() => {
+
     if (!envSubstJSONConfig.value["x-dockge"] || !envSubstJSONConfig.value["x-dockge"].urls || !Array.isArray(envSubstJSONConfig.value["x-dockge"].urls)) {
         return []
     }
@@ -738,3 +678,14 @@ const showDeleteDialog = ref(false)
 
 const serviceStatusList = ref({})
 </script>
+
+
+<style lang="scss" scoped>
+//  :deep(.el-input__wrapper) {
+//     border-top-left-radius: 20px;
+//     border-bottom-left-radius: 20px;
+//     border-top-right-radius: 0;
+//     border-bottom-right-radius: 0;
+//     // border: 0;
+//     // box-shadow: 0 0 0 0px;
+// }</style>

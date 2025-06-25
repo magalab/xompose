@@ -1,0 +1,84 @@
+export default {
+    "Meow": "喵~",
+
+    // Layout
+    "Logout": "退出登录",
+
+    "Login": "登录",
+    "Username": "用户名",
+    "Password": "密码",
+
+    "Home": "主页",
+    "Active": "已启动",
+    "Exited": "已退出",
+    "Inactive": "未启动",
+    "Docker Run": "Docker启动",
+    "Convert to Compose": "转换为Compose格式",
+
+    "stackNotManaged": "这个堆栈不由喵管理。",
+
+    "container": "容器 | 容器组",
+    "url": "网址 | 网址",
+    "Network name...": "网络名称...",
+
+    "stackName": "堆栈名称",
+    "deployStack": "部署",
+    "deleteStack": "删除",
+    "stopStack": "停止",
+    "restartStack": "重启",
+    "updateStack": "更新",
+    "startStack": "启动",
+    "downStack": "停止并退出",
+    "editStack": "编辑",
+    "discardStack": "放弃",
+    "saveStackDraft": "保存",
+    "New Container Name...": "新容器名称...",
+    "addContainer": "添加容器",
+    "Edit": "编辑",
+    "Delete": "删除",
+
+    "Image": "镜像",
+    "Port": "端口 | 端口组",
+    "Volume": "数据卷 | 数据卷组",
+    "RestartPolicyUnlessStopped": "除非手动停止",
+    "RestartPolicyAlways": "始终",
+    "RestartPolicyOnFailure": "在失败时",
+    "RestartPolicyNo": "不重启",
+    "EnvironmentVariable": "环境变量 | 环境变量组",
+    "RestartPolicy": "重启策略",
+    "ContainerName": "容器名称",
+
+    "Lowercase only": "仅小写字母",
+
+    "addInternalNetwork": "添加",
+    "Internal Networks": "内部网络",
+    "External Networks": "外部网络",
+    "No External Networks": "无外部网络",
+
+    "Network": "网络 | 网络组",
+    "NoNetworksAvailable": "无可用网络。您需要先添加内部网络或在右侧启用外部网络。",
+
+    "DependsOn": "容器依赖 | 容器依赖组",
+    "LongSyntaxNotSupported": "此处不支持Long syntax，请使用YAML编辑器。",
+    "addListItem": "添加 {0}",
+
+    "Settings": "设置",
+    "General": "常规",
+    "Hostname": "主机名",
+    "CurrentHostname": "未设置:沿用当前主机名",
+    "AutoGet": "自动获取",
+    
+    "Security": "安全",
+    "Current User": "当前用户",
+    "Update Password": "更新密码",
+    "Change Password": "修改密码",
+    "Current Password": "当前密码",
+    "New Password": "新密码",
+    "Repeat New Password": "重复新密码",
+    "PasswordNotMatchMsg": "两次输入密码不一致",
+    "PasswordUpdatedSuccessfully": "密码更新成功",
+    
+    "About": "关于",
+    "Version": "版本",
+    "Check Update On GitHub": "前往 GitHub 检查更新",
+}

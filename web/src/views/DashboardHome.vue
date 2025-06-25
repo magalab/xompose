@@ -1,34 +1,34 @@
 <template>
     <transition ref="tableContainer" name="slide-fade" appear>
-        <div v-if="$route.name === 'DashboardHome'" class="w-full">
-            <h1 class="mb-3">
-                主页
-            </h1>
-
-            <div class="w-full" >
+        <!-- hide the home page -->
+        <div class="w-full" v-if="$route.name==='DashboardHome'">
+            <h1 class="mb-3">{{ $t("Home") }}</h1>
+            <div class="w-full">
                 <div class="flex flex-row">
                     <div class="col">
-                        <h3>活跃的</h3>
+                        <h3>{{ $t("Active") }}</h3>
                         <span class="num active">{{ activeNum }}</span>
                     </div>
                     <div class="col">
-                        <h3>退出的</h3>
+                        <h3>{{ $t("Exited") }}</h3>
                         <span class="num exited">{{ exitedNum }}</span>
                     </div>
                     <div class="col">
-                        <h3>不活跃的</h3>
+                        <h3>{{ $t("Inactive") }}</h3>
                         <span class="num inactive">{{ inactiveNum }}</span>
                     </div>
                 </div>
 
                 <!-- Docker Run -->
-                <h2 class="mb-3">docker 运行</h2>
+                <h2 class="mb-3"> {{ $t("Docker Run") }}</h2>
                 <div class="mb-3">
-                    <textarea id="name" v-model="dockerRunCommand" type="text" class="form-control docker-run" required
-                        placeholder="docker run ..."></textarea>
+                    <el-input v-model="dockerRunCommand" type="textarea" :autosize="{ minRows: 3 }"
+                        placeholder="docker run ..." resize="none" class="border-none text-xl! max-w-60% min-w-250px">
+                    </el-input>
                 </div>
-
-                <el-button type="primary" class="mb-4" @click="convertDockerRun">转换成 compose</el-button>
+                <el-button type="primary" class="mb-4" @click="convertDockerRun">
+                    {{ $t("Convert to Compose") }}
+                </el-button>
             </div>
         </div>
     </transition>
@@ -36,34 +36,25 @@
 </template>
 
 <script setup lang="ts">
-import { statusNameShort } from '@/types/stack';
 
-const props = defineProps({
-    calculatedHeight: {
-        type: Number,
-        default: 0
-    }
-})
+// const props = defineProps({
+//     calculatedHeight: {
+//         type: Number,
+//         default: 0
+//     }
+// })
 
-const page = ref(1)
+// const page = ref(1)
 const perPage = ref(25)
 const initialPerPage = ref(25)
-const paginationConfig = ref({
-    hideCount: true,
-    chunksNavigation: "scroll",
-})
+// const paginationConfig = ref({
+//     hideCount: true,
+//     chunksNavigation: "scroll",
+// })
 
-const importantHeartBeatListLength = ref(0)
-const displayedRecords = ref([])
+// const importantHeartBeatListLength = ref(0)
+// const displayedRecords = ref([])
 const dockerRunCommand = ref("")
-// showAgentForm: false,
-//             showRemoveAgentDialog: {},
-//             connectingAgent: false,
-//             agent: {
-//                 url: "http://",
-//                 username: "",
-//                 password: "",
-//             }
 
 const activeNum = computed(() => {
     return getStatusNum("active");
@@ -128,7 +119,7 @@ const getStatusNum = (statusName: string): number => {
 
 const convertDockerRun = () => {
     if (dockerRunCommand.value.trim() === "docker run") {
-        throw new Error("Please enter a docker run command");
+        ElMessage.error("Please enter a docker run command");
     }
 
     // composerize is working in dev, but after "vite build", it is not working
@@ -191,7 +182,7 @@ const convertDockerRun = () => {
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/vars";
+@import "@/styles/vars";
 
 .num {
     font-size: 30px;
@@ -207,38 +198,4 @@ const convertDockerRun = () => {
         color: $danger;
     }
 }
-
-.shadow-box {
-    padding: 20px;
-}
-
-table {
-    font-size: 14px;
-
-    tr {
-        transition: all ease-in-out 0.2ms;
-    }
-
-    @media (max-width: 550px) {
-        table-layout: fixed;
-        overflow-wrap: break-word;
-    }
-}
-
-.docker-run {
-    background-color: $dark-bg !important;
-    border: none;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 15px;
-}
-
-// .remove-agent {
-//     cursor: pointer;
-//     color: rgba(255, 255, 255, 0.3);
-// }
-
-// .agent {
-//     a {
-//         text-decoration: none;
-//     }
-// }</style>
+</style>

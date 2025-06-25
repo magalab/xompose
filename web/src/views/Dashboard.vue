@@ -6,8 +6,8 @@
                 <div class="mb-20px">
                     <router-link to="/compose">
                         <el-button type="primary" class="rounded-50%">
-                            <i-ep-plus class="mr-2px text-sm" />
-                            <span>compose</span>
+                            <svg class="i-lucide-plus mr-2px text-sm"></svg>
+                            <span> Compose </span>
                         </el-button>
                     </router-link>
                 </div>
@@ -15,8 +15,7 @@
             </div>
 
             <div ref="container" class="w-full md:w-2/3 xl:w-3/4 mb-3">
-                <!-- Add :key to disable vue router re-use the same component -->
-                <router-view :key="$route.fullPath" :calculatedHeight="height" />
+                <router-view :key="$route.fullPath" />
             </div>
         </div>
     </div>
@@ -24,11 +23,14 @@
 
 <script setup lang="ts">
 import StackList from "../components/StackList.vue";
-const height = ref(0)
+// const height = ref(0)
 const container = ref<HTMLElement>()
+
+const route = useRoute()
 
 onMounted(() => {
     container.value!.offsetHeight
+    console.log(route.fullPath, 1234321)
 })
 
 </script>

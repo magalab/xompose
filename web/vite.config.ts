@@ -8,18 +8,31 @@ import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 
 import UnoCSS from 'unocss/vite'
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
+
+import { prismjsPlugin } from "vite-plugin-prismjs"
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     UnoCSS(),
+    VueI18nPlugin({
+      include: [resolve(__dirname, 'src/locales/**')],
+    }),
+     prismjsPlugin({
+        languages: ['yaml'],
+        plugins: ['line-numbers', 'copy-to-clipboard'], //官网有其他功能,这里开启行数和复制按钮功能
+        theme: 'tomorrow',
+        css: true,
+      }),
     AutoImport({
       imports: [
         'vue',
         'vue-router',
         'pinia',
         '@vueuse/core',
+        'vue-i18n',
       ],
       resolvers: [ElementPlusResolver(),
       IconsResolver({

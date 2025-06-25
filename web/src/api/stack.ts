@@ -1,4 +1,4 @@
-import type { StackItem, StackListResp, StackListItem } from "@/types/stack"
+import type { StackItem, StackListResp } from "@/types/stack"
 import { http } from "@/utils/request"
 
 export const listStackAPI = () => {

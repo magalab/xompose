@@ -1,12 +1,9 @@
 <template>
     <div>
-        <h1 v-show="show" class="mb-3">
-            设置
-        </h1>
-
-        <div class="shadow-box p-20px min-h-[calc(100vh-155px)]">
+        <h1 class="mb-3"> {{ t("Settings") }}</h1>
+        <div class="p-20px min-h-[calc(100vh-155px)]">
             <div class="flex flex-row">
-                <div v-if="showSubMenu" class="lg:w-3/12 md:w-5/12">
+                <div class="lg:w-3/12 md:w-5/12">
                     <router-link v-for="(item, key) in subMenus" :key="key" :to="`/settings/${key}`"
                         class="no-underline">
                         <div
@@ -38,13 +35,7 @@
 </template>
 
 <script setup lang="ts">
-
-const router = useRouter()
-
-const show = ref(true)
-const settings = ref({})
-
-const settingsLoaded = ref(false)
+const { t } = useI18n()
 
 const currentPage = computed(() => {
     let pathSplit = useRoute().path.split("/");
@@ -57,82 +48,16 @@ const currentPage = computed(() => {
 
 const subMenus = ref({
     general: {
-        title: "General",
+        title: t("General"),
     },
     // appearance: {
-    //     title: "Appearance",
+    //     title: t("Appearance"),
     // },
-    // security: {
-    //     title: this.$t("Security"),
-    // },
+    security: {
+        title: t("Security"),
+    },
     about: {
-        title: "About",
+        title: t("About"),
     },
 })
-
-const showSubMenu = computed(() => {
-    // if (this.$root.isMobile) {
-    //     return !this.currentPage;
-    // } else {
-    //     return true;
-    // }
-    return true
-})
-
-// watch: {
-//     "$root.isMobile"() {
-//         this.loadGeneralPage();
-//     }
-// },
-onMounted(() => {
-    loadSettings()
-    loadGeneralPage()
-})
-
-const loadGeneralPage = () => {
-    // mobile todo
-    if (!currentPage) {
-        router.push("/settings/appearance")
-    }
-}
-
-const loadSettings = () => {
-    // getSettings api
-    // this.settings = res.data;
-    // if (this.settings.checkUpdate === undefined) {
-    //     this.settings.checkUpdate = true;
-    // }
-    // this.settingsLoaded = true;
-}
-
-const saveSettings = () => {
-    let { success, msg } = validSettings()
-    if (success) {
-        // save api
-        // this.$root.getSocket().emit("setSettings", this.settings, currentPassword, (res) => {
-        //     this.$root.toastRes(res);
-        //     this.loadSettings();
-
-        //     if (callback) {
-        //         callback();
-        //     }
-        // });
-    } else {
-        // Toast 警告
-        alert(msg)
-    }
-}
-
-const validSettings = () => {
-    if (settings.keepDataPeriodDays < 0) {
-        return {
-            success: false,
-            msg: "dataRetentionTimeError",
-        };
-    }
-    return {
-        success: true,
-        msg: "",
-    }
-}
 </script>
