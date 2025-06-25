@@ -10,6 +10,7 @@ import (
 
 	"xompose/internal/cmd/middleware"
 	"xompose/internal/controller/login"
+	"xompose/internal/controller/network"
 	"xompose/internal/controller/stack"
 	"xompose/internal/controller/system"
 	"xompose/internal/controller/user"
@@ -34,6 +35,7 @@ var (
 					stack.NewV1(),
 					system.NewV1(),
 					user.NewV1(),
+					network.NewV1(),
 				)
 			s.Run()
 			return nil

@@ -1,6 +1,8 @@
 package v1
 
 import (
+	"xompose/internal/model"
+
 	"github.com/gogf/gf/v2/frame/g"
 )
 
@@ -22,10 +24,10 @@ import (
 
 type NetworkListReq struct {
 	g.Meta `path:"/networks" tags:"Network" method:"get" sm:"获取所有的 network"`
-	// 数据
 }
 type NetworkListRes struct {
 	// 数据
+	Items []*model.NetworkItem `json:"items"`
 }
 
 // type NetworkUpdateReq struct {
