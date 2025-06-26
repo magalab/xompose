@@ -1,29 +1,27 @@
 <template>
     <div class="shadow-[0_15px_70px_rgba(0,0,0,0.1)] rounded-lg p-4 mb-3">
         <div class="flex flex-row">
-            <div class="flex w-7/12">
+            <div class="flex flex-col w-7/12">
                 <h4>{{ name }}</h4>
                 <div class="mb-2">
-                    <span class="me-1">{{ imageName }}:</span><span class="tag">{{ imageTag }}</span>
+                    {{ props.status.image }}
                 </div>
                 <div v-if="!isEditMode">
-                    <span class="m-auto w-30% me-1" :class="bgStyle">{{ status }}</span>
-
-                    <a v-for="port in envSubstService.ports" :key="port" :href="parsePort(port).url" target="_blank">
-                        <span class="m-auto w-30% me-1">{{ parsePort(port).display }}</span>
-                    </a>
+                    <span class="m-auto w-30% me-1" :class="bgStyle">{{ props.status.state }}</span>
+                    <span v-for="(port, index) in props.status.ports" :key="index" class="py-1 px-2 bg-red-3 rounded-xl">
+                        {{ port.publishPort }}:{{ port.targetPort }}/{{ port.protocol }}
+                    </span>
                 </div>
             </div>
             <div class="flex w-5/12">
-                <div class="function">
-                    <router-link v-if="!isEditMode" class="btn btn-normal" :to="terminalRouteLink" disabled="">
+                <div class="flex content-center w-full h-full items-center justify-end">
+                    <router-link v-if="!isEditMode" :to="terminalRouteLink" class="no-underline">
                         <svg class="i-lucide-terminal"></svg>
                         Bash
                     </router-link>
                 </div>
             </div>
         </div>
-
         <div v-if="isEditMode" class="mt-2">
             <el-button type="primary" @click="showConfig = !showConfig" class="rounded-10!">
                 <svg class="i-lucide-edit"></svg>
@@ -131,12 +129,19 @@
 
 import { parseDockerPort } from "@/utils/container"
 
+import { type StackStatusItem } from "@/types/stack"
+import type { PropType } from "vue"
+
 const { t } = useI18n()
 
 const showConfig = ref(false)
 
 const props = defineProps({
     name: {
+        type: String,
+        required: true,
+    },
+    stackName: {
         type: String,
         required: true,
     },
@@ -149,12 +154,25 @@ const props = defineProps({
         default: false,
     },
     status: {
+        type: Object as PropType<StackStatusItem>,
+        default: {} as StackStatusItem,
+    },
+    // service: {
+    //     type: Object,
+    //     default: {}
+    // },
+    endpoint: {
         type: String,
-        default: "N/A",
-    }
+        default: "",
+        required: false,
+    },
 })
 
-const onSelect = (e) => {
+onMounted(() => {
+    console.log(props.status, 1231412312)
+})
+
+const onSelect = (e: any) => {
     console.log(e, 123)
     service.value.restart = e
     console.log(service.value, 421)
@@ -207,9 +225,9 @@ const terminalRouteLink = computed(() => {
         return {
             name: "containerTerminalEndpoint",
             params: {
-                endpoint: this.endpoint,
-                stackName: this.stackName,
-                serviceName: this.name,
+                endpoint: props.endpoint,
+                stackName: props.stackName,
+                serviceName: props.name,
                 type: "bash",
             },
         }
@@ -217,8 +235,8 @@ const terminalRouteLink = computed(() => {
         return {
             name: "containerTerminal",
             params: {
-                stackName: this.stackName,
-                serviceName: this.name,
+                stackName: props.stackName,
+                serviceName: props.name,
                 type: "bash",
             },
         }
@@ -227,25 +245,28 @@ const terminalRouteLink = computed(() => {
 
 const envSubstJSONConfig = computed(() => {
     // return this.$parent.$parent.envsubstJSONConfig;
+    return {
+        "services": {}
+    }
 })
 
 const envSubstService = computed(() => {
-    if (!envSubstJSONConfig.services[props.name]) {
+    if (!envSubstJSONConfig.value.services[props.name]) {
         return {}
     }
-    return envSubstJSONConfig.services[props.name]
+    return envSubstJSONConfig.value.services[props.name]
 })
 
 const imageName = computed(() => {
-    if (envSubstService.image) {
-        return envSubstService.image.split(":")[0]
+    if (envSubstService.value.image) {
+        return envSubstService.value.image.split(":")[0]
     } else {
         return ""
     }
 })
 const imageTag = computed(() => {
-    if (envSubstService.image) {
-        let tag = envSubstService.image.split(":")[1]
+    if (envSubstService.value.image) {
+        let tag = envSubstService.value.image.split(":")[1]
 
         if (tag) {
             return tag
@@ -264,6 +285,7 @@ const endpoint = computed(() => {
 
 const stack = computed(() => {
     // return this.$parent.$parent.stack
+    return {}
 })
 
 const stackName = computed(() => {
@@ -271,7 +293,7 @@ const stackName = computed(() => {
 })
 
 const service = computed(() => {
-    return { image: "" , restart: 'no'}
+    return { image: "", restart: 'no' }
     if (!jsonObject.value.services[props.name]) {
         return {}
     }

@@ -20,6 +20,9 @@ const code = defineModel(
     }
 )
 
+// 只读状态
+const editable = defineModel<boolean>('editable', { default: true })
+
 const view = ref()
 const viewRef = ref<Element>()
 
@@ -35,7 +38,7 @@ const init = () => {
         doc: code.value,
         extensions: [
             basicSetup,
-            language.of(yaml()), 
+            language.of(yaml()),
             tabSize.of(EditorState.tabSize.of(2)),
             EditorView.updateListener.of(v => {
                 code.value = v.state.doc.toString()
@@ -44,6 +47,9 @@ const init = () => {
                 '&': { maxHeight: `400px`, overflow: 'auto' },
                 '.cm-scroller': { maxHeight: `400px` },
             }),
+            // TODO editable
+            // EditorView.editable.of(editable.value)
+            EditorView.editable.of(true)
         ],
     })
 
@@ -53,6 +59,17 @@ const init = () => {
     })
 }
 
+
+// TODO toggle editable
+watch(editable, (newVal, oldVal) => {
+    // view.value!.dispatch({
+    //     effects: StateEffect.reconfigure.of([
+    //         EditorView.editable.of(newVal)
+    //     ])
+    // })
+
+})
+
 // 在组件挂载时初始化编辑器
 onMounted(() => {
     init()
@@ -60,7 +77,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div ref="viewRef" ></div>
+    <div ref="viewRef"></div>
 </template>
 
 <style lang="scss" scoped>

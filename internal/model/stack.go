@@ -7,8 +7,11 @@ type StackModel struct {
 }
 
 type StackItem struct {
-	Id          string      `json:"id"`
+	Id          int         `json:"id"`
 	StackName   string      `json:"stackName"`
+	YamlPath    string      `json:"yamlPath"`
+	YamlContent string      `json:"yamlContent"`
+	EnvContent  string      `json:"envContent"`
 	StackStatus StackStatus `json:"stackStatus"`
 }
 
@@ -40,11 +43,28 @@ type StackListItem struct {
 
 func (m *StackModel) ToItem() *StackItem {
 	return &StackItem{
+		Id:          m.Id,
 		StackName:   m.StackName,
 		StackStatus: StackStatus(m.StackStatus),
+		YamlPath:    m.YamlContent,
+		YamlContent: m.YamlContent,
+		EnvContent:  m.EnvContent,
 	}
 }
 
 type StackDeleteReq struct {
 	StackName string `json:"stackName"`
+}
+
+type StackStatusItem struct {
+	Image   string      `json:"image"`
+	Service string      `json:"service"`
+	State   StackStatus `json:"state"`
+	Ports   []*Port     `json:"ports"`
+}
+
+type Port struct {
+	PublishPort int    `json:"publishPort"`
+	TargetPort  int    `json:"targetPort"`
+	Protocol    string `json:"protocol"`
 }

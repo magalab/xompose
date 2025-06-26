@@ -29,6 +29,7 @@ type StackColumns struct {
 	YamlContent string // yaml 文件
 	StackStatus string // 服务状态
 	YamlPath    string // YAML文件路劲
+	EnvContent  string // 环境变量
 }
 
 // stackColumns holds the columns for the table stack.
@@ -41,6 +42,7 @@ var stackColumns = StackColumns{
 	YamlContent: "yaml_content",
 	StackStatus: "stack_status",
 	YamlPath:    "yaml_path",
+	EnvContent:  "env_content",
 }
 
 // NewStackDao creates and returns a new DAO object for table data access.

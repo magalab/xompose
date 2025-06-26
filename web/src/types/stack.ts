@@ -14,10 +14,12 @@ export type ListItem = StackItem & {
 }
 
 export type StackItem = {
-    id: string
-    stackName: String
-    stackStatus: String
-    yamlContent: String
+    id?: string
+    stackName: string
+    stackStatus?: string
+    yamlContent: string
+    yamlPath: string
+    envContent: string
 }
 
 
@@ -56,4 +58,21 @@ export const statusNameShort = (status: number): string => {
         default:
             return "?";
     }
+}
+
+export type StackStatusListResp = {
+    items: StackStatusItem[]
+}
+
+export type StackStatusItem = {
+    service: string
+    image: string
+    state: string
+    ports: Port[]
+}
+
+type Port = {
+    publishPort: number
+    targetPort : number
+    protocol: string
 }

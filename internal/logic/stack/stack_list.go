@@ -26,7 +26,7 @@ func (s *sStack) StackList(ctx context.Context, req *model.StackListReq) ([]*mod
 		return &model.StackListItem{
 
 			StackItem: &model.StackItem{
-				Id:          stack.ID,
+				// Id:          stack.ID,
 				StackName:   stack.Name,
 				StackStatus: model.StackStatus(stack.Status),
 			},

@@ -3,73 +3,67 @@
         <div>
             <h1 v-if="isAdd" class="mb-3 text-xl fw-700"> Compose </h1>
             <h1 v-else class="mb-3">
-                <Uptime :stack="globalStack" :pill="true" /> {{ stack.name }}
+                <Uptime :stack="stack" :pill="true" /> {{ stack.stackName }}
             </h1>
-
-            <div v-if="stack.isManaged" class="mb-3">
-                <div class="btn-group me-2" role="group">
-                    <button v-if="isEditMode" class="btn btn-primary" :disabled="processing" @click="deployStack">
+            <div v-if="stack.isManaged" class="mb-3 flex items-center p-4px">
+                <el-button-group>
+                    <el-button type="primary" size="large" v-if="isEditMode" :disabled="processing"
+                        @click="deployStack">
                         <svg class="i-lucide-rocket"></svg>
                         {{ $t("deployStack") }}
-                    </button>
-
-                    <button v-if="isEditMode" class="btn btn-normal" :disabled="processing" @click="saveStack">
+                    </el-button>
+                    <el-button type="primary" size="large" v-if="isEditMode" :disabled="processing" @click="saveStack">
                         <svg class="i-lucide-save"></svg>
                         {{ $t("saveStackDraft") }}
-                    </button>
-
-                    <button v-if="!isEditMode" class="btn btn-secondary" :disabled="processing" @click="enableEditMode">
+                    </el-button>
+                    <el-button size="large" v-if="!isEditMode" :disabled="processing" @click="enableEditMode">
                         <svg class="i-lucide-edit"></svg>
                         {{ $t("editStack") }}
-                    </button>
-
-                    <button v-if="!isEditMode && !active" class="btn btn-primary" :disabled="processing"
+                    </el-button>
+                    <el-button size="large" v-if="!isEditMode && !active" class="btn btn-primary" :disabled="processing"
                         @click="startStack">
                         <svg class="i-lucide-play"></svg>
                         {{ $t("startStack") }}
-                    </button>
-
-                    <button v-if="!isEditMode && active" class="btn btn-normal " :disabled="processing"
+                    </el-button>
+                    <el-button size="large" v-if="!isEditMode && active" class="btn btn-normal " :disabled="processing"
                         @click="restartStack">
                         <svg class="i-lucide-refresh-ccw"></svg>
                         {{ $t("restartStack") }}
-                    </button>
-
-                    <button v-if="!isEditMode" class="btn btn-normal" :disabled="processing" @click="updateStack">
+                    </el-button>
+                    <el-button size="large" v-if="!isEditMode" class="btn btn-normal" :disabled="processing"
+                        @click="updateStack">
                         <svg class="i-lucide-refresh-ccw"></svg>
                         {{ $t("updateStack") }}
-                    </button>
+                    </el-button>
 
-                    <button v-if="!isEditMode && active" class="btn btn-normal" :disabled="processing"
-                        @click="stopStack">
+                    <el-button size="large" v-if="!isEditMode && active" :disabled="processing" @click="stopStack">
                         <svg class="i-lucide-circle-stop"></svg>
                         {{ $t("stopStack") }}
-                    </button>
-
-                    <!-- <BDropdown right text="" variant="normal">
-                        <BDropdownItem @click="downStack">
-                            <font-awesome-icon icon="stop" class="me-1" />
-                            {{ $t("downStack") }}
-                        </BDropdownItem>
-                    </BDropdown> -->
-                </div>
-
-                <button v-if="isEditMode && !isAdd" class="btn btn-normal" :disabled="processing" @click="discardStack">
-                    {{ $t("discardStack") }}
-                </button>
-                <button v-if="!isEditMode" class="btn btn-danger" :disabled="processing"
-                    @click="showDeleteDialog = !showDeleteDialog">
-                    <svg class="i-lucide-trash"></svg>
-                    {{ $t("deleteStack") }}
-                </button>
+                    </el-button>
+                    <el-button size="large" v-if="!isEditMode && active" :disabled="processing" @click="downStack">
+                        <svg class="i-lucide-circle-stop"></svg>
+                        {{ $t("downStack") }}
+                    </el-button>
+                </el-button-group>
+                <el-button-group class="ml-1px " round>
+                    <el-button size="large" round v-if="isEditMode && !isAdd" :disabled="processing"
+                        @click="discardStack">
+                        {{ $t("discardStack") }}
+                    </el-button>
+                    <el-button size="large" round type="danger" v-if="!isEditMode" :disabled="processing"
+                        @click="showDeleteDialog = !showDeleteDialog">
+                        <svg class="i-lucide-trash"></svg>
+                        {{ $t("deleteStack") }}
+                    </el-button>
+                </el-button-group>
             </div>
 
             <!-- URLs -->
-            <div v-if="urls.length > 0" class="mb-3">
+            <!-- <div v-if="urls.length > 0" class="mb-3">
                 <a v-for="(url, index) in urls" :key="index" target="_blank" :href="url.url">
                     <span class="badge bg-secondary me-2">{{ url.display }}</span>
                 </a>
-            </div>
+            </div> -->
 
             <!-- Progress Terminal -->
             <!-- <transition name="slide-fade" appear>
@@ -99,7 +93,7 @@
 
                     <!-- Containers -->
                     <!-- <h4 class="mb-3">{{ $tc("container", 2) }}</h4> -->
-                    <h4 class="mb-3">{{ $t("container") }}</h4>
+                    <h4 class="mb-3">{{ $t("container", 2) }}</h4>
                     <div v-if="isEditMode" class="flex mb-3">
                         <el-input v-model="newContainerName" :placeholder="$t(`New Container Name...`)"
                             class="[&_.el-input\_\_wrapper]:rounded-l-5 [&_.el-input\_\_wrapper]:rounded-r-0" />
@@ -108,9 +102,11 @@
                         </el-button>
                     </div>
                     <div ref="containerList">
-                        <Container v-for="(_, name) in jsonConfig.services" :key="name" :name="name"
+                         <!-- :service="envSubstJSONConfig.services[name]" -->
+                        <Container v-for="(_, name) in jsonConfig.services" :key="name" :name="`${name}`"
                             :is-edit-mode="isEditMode" :first="name === Object.keys(jsonConfig.services)[0]"
-                            :status="serviceStatusList[name]">
+                            :status="serviceStatusList[name]"
+                            :stackName="stack.stackName">
                         </Container>
                     </div>
 
@@ -135,19 +131,20 @@
                     </div> -->
 
                     <!-- Combined Terminal Output -->
-                    <!-- <div v-show="!isEditMode">
-                        <h4 class="mb-3"> 终端 </h4>
+                    <div v-show="!isEditMode">
+                        <h4 class="mb-3"> {{ $t("Terminal") }} </h4>
                         <Terminal ref="combinedTerminal" class="mb-3 h-200px" :name="combinedTerminalName"
                             :endpoint="endpoint" :rows="combinedTerminalRows" :cols="combinedTerminalCols"
                             style="height: 315px">
                         </Terminal>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="lg:w-1/2">
-                    <h4 class="mb-3">{{ stack.composeFileName }}</h4>
+                    <h4 class="mb-3">{{ stack.yamlPath.split("/")[-1] }}</h4>
                     <!-- YAML editor -->
                     <div class="mb-3" :class="{ 'edit-mode': isEditMode }">
-                        <YamlEditor v-model="stack.composeYAML" class="max-h-400px"></YamlEditor>
+                        <YamlEditor v-model="stack.yamlContent" v-model:editable="isEditMode" class="max-h-400px">
+                        </YamlEditor>
                     </div>
                     <div v-if="isEditMode" class="mb-3">
                         {{ yamlError }}
@@ -157,7 +154,7 @@
                     <div v-if="isEditMode">
                         <h4 class="mb-3">.env</h4>
                         <div class="mb-3" :class="{ 'edit-mode': isEditMode }">
-                            <YamlEditor v-model="stack.composeENV"></YamlEditor>
+                            <YamlEditor v-model="stack.envContent"></YamlEditor>
                         </div>
                     </div>
 
@@ -192,9 +189,13 @@
             </div>
 
             <!-- Delete Dialog -->
-            <!-- <BModal v-model="showDeleteDialog" :cancelTitle="$t('cancel')" :okTitle="$t('deleteStack')" okVariant="danger" @ok="deleteDialog"> -->
-            <!-- {{ $t("deleteStackMsg") }} -->
-            <!-- </BModal> -->
+            <el-dialog v-model="showDeleteDialog">
+                <span> {{ $t("deleteStackMsg") }} </span>
+                <template #footer>
+                    <el-button type="primary" @click="showDeleteDialog = false"> {{ $t("Cancel") }}</el-button>
+                    <el-button type="danger" @click="deleteStack">{{ $t("Confirm") }}</el-button>
+                </template>
+            </el-dialog>
         </div>
     </transition>
 </template>
@@ -210,8 +211,12 @@ import {
 import NetworkInput from "../components/NetworkInput.vue"
 import dotenv from "dotenv"
 import { envSubstYAML, yamlToJSON, copyYAMLComments } from "@/utils/yaml"
-import { RUNNING } from "@/types/stack"
+import { type ListItem, type StackStatusItem } from "@/types/stack"
 import YamlEditor from "@/components/YamlEditor.vue"
+import { deleteStackAPI, deployStackAPI, downStackAPI, getStackAPI, getStackStatusAPI, reStartStackAPI, saveStackAPI, startStackAPI, stopStackAPI, updateStackAPI, } from "@/api/stack"
+
+import { Document } from "yaml"
+
 // onBeforeRouteUpdate((to, from, next) => {
 //     exitConfirm(next)
 // })
@@ -226,46 +231,40 @@ const defaultTemplate = `services:
     restart: unless-stopped
     ports:
       - "8080:80"
+    environment:
+      - DEBUG=1
+      - PROD
+      - A=\${a}
+      - C=\${c}
 `
-const defaultEnv = "# VARIABLE=value #comment"
+const defaultEnv = "# VARIABLE=value #comment\na=b\nc=d\ne=false"
 
-let yamlErrorTimeout = null
+// let yamlErrorTimeout: ReturnType<typeof setTimeout>
 
-let serviceStatusTimeout = null
+let serviceStatusTimeout: ReturnType<typeof setTimeout>
 
 const route = useRoute()
+const router = useRouter()
 
 const isEditMode = ref(false)
 
 
 
-const exitConfirm = (next) => {
-    console.log(next, isEditMode.value, 1231231)
-    if (isEditMode.value) {
-        if (confirm("退出")) {
-            exitAction()
-            next()
-        } else {
-            next(false)
-        }
-    } else {
-        exitAction()
-        next()
-    }
-}
+// const exitConfirm = (next) => {
+//     if (isEditMode.value) {
+//         if (confirm("退出")) {
+//             exitAction()
+//             next()
+//         } else {
+//             next(false)
+//         }
+//     } else {
+//         exitAction()
+//         next()
+//     }
+// }
 
-interface Stack {
-    stackName: string,
-    composeFileName: string,
-    stackStatus: string,
-    composeYAML: string,
-    isManaged: boolean,
-    composeENV: string,
-    endpoint: string,
-}
-
-const stack = ref<Stack>({} as Stack)
-
+const stack = ref<ListItem>({} as ListItem)
 const stopServiceStatusTimeout = ref(false)
 
 const exitAction = () => {
@@ -293,13 +292,19 @@ const isAdd = computed(() => {
 
 const processing = ref(true)
 
+// status of containers in stack
+// const serviceStatusList = ref({} as Record<string, string>)
+const serviceStatusList = ref({} as Record<string, StackStatusItem>)
+
+// const readOnly = ref(false)
+
 
 onMounted(() => {
     if (isAdd.value) {
         processing.value = false
         isEditMode.value = true
 
-        let composeYAML = defaultTemplate
+        let yamlContent = defaultTemplate
         let composeENV = defaultEnv
 
         // if (this.$root.composeTemplate) {
@@ -317,15 +322,15 @@ onMounted(() => {
 
         // Default Values
         stack.value = {
+            id: "",
             stackName: "",
             stackStatus: "running(1)",
-            composeFileName: "",
-            composeYAML,
-            composeENV,
+            yamlPath: "",
+            yamlContent: "",
+            envContent: "",
             isManaged: true,
-            endpoint: "",
+            // endpoint: "",
         }
-
         yamlCodeChange()
 
     } else {
@@ -337,10 +342,24 @@ onMounted(() => {
     requestServiceStatus()
 })
 
-const requestServiceStatus = () => {
+const requestServiceStatus = async () => {
     if (isAdd.value) {
         return
     }
+    const stackName = route.params.stackName as string
+
+    const res = await getStackStatusAPI({ stackName })
+    serviceStatusList.value = res.items.reduce((object, item) => {
+        object[item.service] = item
+        return object
+    }, {} as Record<string, StackStatusItem>)
+
+
+    // serviceStatusList.value =  res.items.reduce((object, item) => {
+    //     object[item.service] =  item.state
+    //     return object
+    // }, {} as Record<string, string>)
+    // console.log(serviceStatusList, res.items, "list")
     // TODO 请求 status
     // this.$root.emitAgent(this.endpoint, "serviceStatusList", this.stack.name, (res) => {
     //     if (res.ok) {
@@ -357,39 +376,29 @@ const enableEditMode = () => {
 }
 
 // stack 操作
-const loadStack = () => {
+const loadStack = async () => {
     processing.value = true
-    // TODO 获取 stack 信息
-    // this.$root.emitAgent(this.endpoint, "getStack", this.stack.name, (res) => {
-    //     if (res.ok) {
-    //         this.stack = res.stack
-    //         this.yamlCodeChange()
-    //         this.processing = false
-    //         this.bindTerminal()
-    //     } else {
-    //         this.$root.toastRes(res)
-    //     }
-    // })
+    const stackName = route.params.stackName as string
+    const res = await getStackAPI({ stackName })
+    stack.value = res
+    yamlCodeChange()
+    processing.value = false
 }
 
-const deployStack = () => {
+const deployStack = async () => {
     processing.value = true
-
     if (!jsonConfig.value.services) {
         ElMessage.error("No services found in compose.yaml")
         processing.value = false
         return
     }
-
     // Check if services is object
     if (typeof jsonConfig.value.services !== "object") {
         ElMessage.error("Services must be an object")
         processing.value = false
         return
     }
-
     let serviceNameList = Object.keys(jsonConfig.value.services)
-
     // Set the stack name if empty, use the first container name
     if (stack.value.stackName && serviceNameList.length > 0) {
         let serviceName = serviceNameList[0]
@@ -402,90 +411,76 @@ const deployStack = () => {
         }
     }
 
+    // TODO
     bindTerminal()
 
-    // TODO 部署
-    // this.$root.emitAgent(this.stack.endpoint, "deployStack", this.stack.name, this.stack.composeYAML, this.stack.composeENV, this.isAdd, (res) => {
-    //     this.processing = false
-    //     this.$root.toastRes(res)
-
-    //     if (res.ok) {
-    //         this.isEditMode = false
-    //         this.$router.push(this.url)
-    //     }
-    // })
-}
-
-const downStack = () => {
+    await deployStackAPI({
+        stackName: stack.value.stackName,
+        yamlContent: stack.value.yamlContent,
+        envContent: stack.value.envContent
+    })
     processing.value = true
-    // TODO 停止
-    // this.$root.emitAgent(this.endpoint, "downStack", this.stack.name, (res) => {
-    //     this.processing = false
-    //     this.$root.toastRes(res)
-    // })
+    ElMessage.success("部署成功")
+    isEditMode.value = false
+    // TODO ?
+    router.push(route.path)
 }
 
-const startStack = () => {
+const downStack = async () => {
     processing.value = true
-
-    // TODO
-    // this.$root.emitAgent(this.endpoint, "startStack", this.stack.name, (res) => {
-    //     this.processing = false
-    //     this.$root.toastRes(res)
-    // })
+    await downStackAPI({ stackName: stack.value.stackName })
+    processing.value = false
+    ElMessage.success("删除成功")
 }
 
-const stopStack = () => {
+const startStack = async () => {
     processing.value = true
-
-    // TODO 
-    // this.$root.emitAgent(this.endpoint, "stopStack", this.stack.name, (res) => {
-    //     this.processing = false
-    //     this.$root.toastRes(res)
-    // })
+    await startStackAPI({ stackName: stack.value.stackName })
+    processing.value = false
+    ElMessage.success("启动成功")
 }
 
-const saveStack = () => {
+const stopStack = async () => {
     processing.value = true
-
-    // TODO
-    // this.$root.emitAgent(this.stack.endpoint, "saveStack", this.stack.name, this.stack.composeYAML, this.stack.composeENV, this.isAdd, (res) => {
-    //     this.processing = false
-    //     this.$root.toastRes(res)
-
-    //     if (res.ok) {
-    //         this.isEditMode = false
-    //         this.$router.push(this.url)
-    //     }
-    // })
+    await stopStackAPI({ stackName: stack.value.stackName })
+    processing.value = false
+    ElMessage.success("停止成功")
 }
 
-const restartStack = () => {
+const saveStack = async () => {
     processing.value = true
-
-    // this.$root.emitAgent(this.endpoint, "restartStack", this.stack.name, (res) => {
-    //     this.processing = false
-    //     this.$root.toastRes(res)
-    // })
+    await saveStackAPI({
+        stackName: stack.value.stackName,
+        yamlContent: stack.value.yamlContent,
+        envContent: stack.value.envContent,
+        yamlPath: stack.value.yamlPath,
+    })
+    processing.value = false
+    ElMessage.success("保存成功")
 }
 
-const updateStack = () => {
+const restartStack = async () => {
     processing.value = true
-
-    // this.$root.emitAgent(this.endpoint, "updateStack", this.stack.name, (res) => {
-    //     this.processing = false
-    //     this.$root.toastRes(res)
-    // })
+    await reStartStackAPI({ stackName: stack.value.stackName })
+    processing.value = false
+    ElMessage.success("重启成功")
 }
 
-const deleteDialog = () => {
-    // TODO
-    // this.$root.emitAgent(this.endpoint, "deleteStack", this.stack.name, (res) => {
-    //     this.$root.toastRes(res)
-    //     if (res.ok) {
-    //         this.$router.push("/")
-    //     }
-    // })
+const updateStack = async () => {
+    processing.value = true
+    await updateStackAPI({ stackName: stack.value.stackName })
+    processing.value = false
+    ElMessage.success("更新成功")
+}
+
+const deleteStack = async () => {
+    processing.value = true
+    await deleteStackAPI({ stackName: stack.value.stackName })
+    processing.value = false
+    ElMessage.success("删除成功")
+    setTimeout(() => {
+        router.push("/")
+    }, 300)
 }
 
 const discardStack = () => {
@@ -493,80 +488,80 @@ const discardStack = () => {
     isEditMode.value = false
 }
 
-const yamlDoc = ref({})
+const yamlDoc = ref({} as Document)
 const yamlError = ref("")
 
-const envSubstJSONConfig = ref({})
-
-const jsonConfig = ref({})
-const editorFocus = ref(false)
-
-const yamlCodeChange = () => {
-    try {
-        let { config, doc } = yamlToJSON(stack.value.composeYAML)
-
-        yamlDoc.value = doc
-        jsonConfig.value = config
-
-        let env = dotenv.parse(stack.value.composeENV)
-        let envYAML = envSubstYAML(stack.value.composeYAML, env)
-        envSubstJSONConfig.value = yamlToJSON(envYAML).config
-
-        clearTimeout(yamlErrorTimeout)
-        yamlError.value = ""
-    } catch (e) {
-        clearTimeout(yamlErrorTimeout)
-
-        if (yamlError.value) {
-            yamlError.value = e.message
-
-        } else {
-            yamlErrorTimeout = setTimeout(() => {
-                yamlError.value = e.message
-            }, 3000)
+interface JsonConfig {
+    version: string
+    services: {
+        [key: string]: {
+            container_name?: string
+            image?: string
+            restart?: string
+            ports?: string[]
+            volumes?: string[]
+            environment?: string[]
+            networks?: string[]
+        }
+    }
+    networks: {
+        [key: string]: {
+            driver: string
         }
     }
 }
 
-// watch: {
-//     "stack.composeYAML": {
-//         handler() {
-//             if (this.editorFocus) {
-//                 console.debug("yaml code changed")
-//                 this.yamlCodeChange()
-//             }
-//         },
-//         deep: true,
-//         },
+const jsonConfig = ref<JsonConfig>({} as JsonConfig)
+const envSubstJSONConfig = ref<JsonConfig>({} as JsonConfig)
+// 编辑器失焦点
+const editorFocus = ref(false)
 
-//     "stack.composeENV": {
-//         handler() {
-//             if (this.editorFocus) {
-//                 console.debug("env code changed")
-//                 this.yamlCodeChange()
-//             }
-//         },
-//         deep: true,
-//         },
+const yamlCodeChange = () => {
+    try {
+        let { config, doc } = yamlToJSON(stack.value.yamlContent)
+        yamlDoc.value = doc
+        jsonConfig.value = config
+        let env = dotenv.parse(stack.value.envContent)
+        // 使用 env 替换 compose 文件中, 类似 A=${A} 的环境声明
+        let envYAML = envSubstYAML(stack.value.yamlContent, env)
+        envSubstJSONConfig.value = yamlToJSON(envYAML).config
+        console.log(envSubstJSONConfig.value.services["nginx-1"].ports, "envSubstJSONConfig.value")
+        yamlError.value = ""
+    } catch (e: any) {
+        yamlError.value = e.message
+    }
+}
 
-//     jsonConfig: {
-//         handler() {
-//             if (!this.editorFocus) {
-//                 console.debug("jsonConfig changed")
+// 监听主要的几个内容变化
+watch(
+    () => stack.value.yamlContent, () => {
+        console.debug("yaml code changed")
+        yamlCodeChange()
+    }
+)
 
-//                 let doc = new Document(jsonConfig.value)
+watch(
+    () => stack.value.envContent, () => {
+        console.debug("env code changed")
+        yamlCodeChange()
+    }
+)
 
-//                 // Stick back the yaml comments
-//                 if (yamlDoc.value) {
-//                     copyYAMLComments(doc, yamlDoc.value)
-//                 }
+watch(
+    jsonConfig, () => {
+        console.debug("jsonConfig changed")
+        if (editorFocus.value) {
+            return
+        }
+        let doc = new Document(jsonConfig.value)
+        if (yamlDoc.value) {
+            copyYAMLComments(doc, yamlDoc.value)
+        }
+        stack.value.yamlContent = doc.toString()
+        yamlDoc.value = doc
+    }, { deep: true }
+)
 
-//                 stack.value.composeYAML = doc.toString()
-//                 yamlDoc.value = doc
-//             }
-//         },
-//         deep: true,
-//         },
 
 const stackNameToLowercase = () => {
     stack.value.stackName = stack.value.stackName.toLowerCase()
@@ -600,17 +595,12 @@ const bindTerminal = () => {
     // this.$refs.progressTerminal?.bind(this.endpoint, this.terminalName)
 }
 
-const globalStack = computed(() => {
-    // return this.$root.completeStackList[this.stack.name + "_" + this.endpoint]
-    return stack
-})
-
 const status = computed(() => {
-    return globalStack?.value.stackStatus
+    return stack.value.stackStatus as string
 })
 
 const active = computed(() => {
-    return status === RUNNING
+    return status.value.includes("running")
 })
 
 const terminalName = computed(() => {
@@ -635,40 +625,40 @@ const endpoint = computed(() => {
     return stack.value.endpoint || route.params.endpoint || ""
 })
 
-const url = computed(() => {
-    if (stack.value.endpoint) {
-        return `/compose/${stack.value.stackName}/${stack.value.endpoint}`
-    } else {
-        return `/compose/${stack.value.stackName}`
-    }
-})
+// const url = computed(() => {
+//     if (stack.value.endpoint) {
+//         return `/compose/${stack.value.stackName}/${stack.value.endpoint}`
+//     } else {
+//         return `/compose/${stack.value.stackName}`
+//     }
+// })
 
-const urls = computed(() => {
+// const urls = computed(() => {
 
-    if (!envSubstJSONConfig.value["x-dockge"] || !envSubstJSONConfig.value["x-dockge"].urls || !Array.isArray(envSubstJSONConfig.value["x-dockge"].urls)) {
-        return []
-    }
+//     if (!envSubstJSONConfig.value["x-dockge"] || !envSubstJSONConfig.value["x-dockge"].urls || !Array.isArray(envSubstJSONConfig.value["x-dockge"].urls)) {
+//         return []
+//     }
 
-    let urls = []
-    for (const url of envSubstJSONConfig.value["x-dockge"].urls) {
-        let display
-        try {
-            let obj = new URL(url)
-            let pathname = obj.pathname
-            if (pathname === "/") {
-                pathname = ""
-            }
-            display = obj.host + pathname + obj.search
-        } catch (e) {
-            display = url
-        }
+//     let urls = []
+//     for (const url of envSubstJSONConfig.value["x-dockge"].urls) {
+//         let display
+//         try {
+//             let obj = new URL(url)
+//             let pathname = obj.pathname
+//             if (pathname === "/") {
+//                 pathname = ""
+//             }
+//             display = obj.host + pathname + obj.search
+//         } catch (e) {
+//             display = url
+//         }
 
-        urls.push({ display, url })
-    }
-    return urls
-})
+//         urls.push({ display, url })
+//     }
+//     return urls
+// })
 
-const showProgressTerminal = ref(false)
+const showProgressTerminal = ref(true)
 
 const progressTerminalRows = PROGRESS_TERMINAL_ROWS
 const combinedTerminalRows = COMBINED_TERMINAL_ROWS
@@ -676,16 +666,5 @@ const combinedTerminalCols = COMBINED_TERMINAL_COLS
 
 const showDeleteDialog = ref(false)
 
-const serviceStatusList = ref({})
+
 </script>
-
-
-<style lang="scss" scoped>
-//  :deep(.el-input__wrapper) {
-//     border-top-left-radius: 20px;
-//     border-bottom-left-radius: 20px;
-//     border-top-right-radius: 0;
-//     border-bottom-right-radius: 0;
-//     // border: 0;
-//     // box-shadow: 0 0 0 0px;
-// }</style>

@@ -18,7 +18,7 @@ type StackAddRes struct{}
 // StackGetReq 获取服务详情
 type StackGetReq struct {
 	g.Meta `path:"/stack" tags:"Stack" method:"get" sm:"获取服务详情"`
-	api.Auth
+	// api.Auth
 	*model.StackGetReq
 }
 type StackGetRes struct {
@@ -53,8 +53,8 @@ type StackDeleteRes struct{}
 
 // StackDeployReq 部署服务
 type StackDeployReq struct {
-	g.Meta    `path:"/stack/deploy" tags:"Stack" method:"post" sm:"部署服务"`
-	StackName string `json:"stackName"`
+	g.Meta `path:"/stack/deploy" tags:"Stack" method:"post" sm:"部署服务"`
+	*model.StackAddReq
 }
 
 type StackDeployRes struct{}
@@ -75,6 +75,14 @@ type StackStopReq struct {
 
 type StackStopRes struct{}
 
+// StackDownReq 停止并删除服务
+type StackDownReq struct {
+	g.Meta `path:"/stack/down" tags:"Stack" method:"post" sm:"停止并删除服务"`
+	*model.StackGetReq
+}
+
+type StackDownRes struct{}
+
 // StackRestartReq 重启服务
 type StackRestartReq struct {
 	g.Meta    `path:"/stack/restart" tags:"Stack" method:"post" sm:"重启服务"`
@@ -82,3 +90,12 @@ type StackRestartReq struct {
 }
 
 type StackRestartRes struct{}
+
+type StackStatusReq struct {
+	g.Meta `path:"/stack/status" tags:"Stack" method:"get" sm:"获取服务状态"`
+	*model.StackGetReq
+}
+
+type StackStatusRes struct {
+	Items []*model.StackStatusItem `json:"items" dc:"列表"`
+}

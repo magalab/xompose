@@ -20,6 +20,9 @@ export default {
     "container": "容器 | 容器组",
     "url": "网址 | 网址",
     "Network name...": "网络名称...",
+    "Cancel": "取消",
+    "Confirm": "确认",
+    "deleteStackMsg": "你确定要删除这个堆栈吗?",
 
     "stackName": "堆栈名称",
     "deployStack": "部署",
@@ -36,6 +39,7 @@ export default {
     "addContainer": "添加容器",
     "Edit": "编辑",
     "Delete": "删除",
+    "Terminal": "终端",
 
     "Image": "镜像",
     "Port": "端口 | 端口组",

@@ -13,10 +13,12 @@ import (
 type (
 	IStack interface {
 		StackDelete(ctx context.Context, req *model.StackDeleteReq) error
+		StackDown(ctx context.Context, req *model.StackGetReq) error
 		StackGet(ctx context.Context, req *model.StackGetReq) (*model.StackListItem, error)
 		StackList(ctx context.Context, req *model.StackListReq) ([]*model.StackListItem, error)
 		StackAdd(ctx context.Context, req *model.StackAddReq) error
 		StackStart(ctx context.Context, stackName string) error
+		StackStatus(ctx context.Context, req *model.StackGetReq) ([]*model.StackStatusItem, error)
 		StackStop(ctx context.Context, stackName string) error
 	}
 )

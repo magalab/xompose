@@ -1,16 +1,14 @@
-import type { Response } from "@/types/base"
-import type { LoginRes } from "@/types/user"
 import { http } from "@/utils/request"
 
 export const loginAPI = (data: { username: string, password: string }) => {
-    return http.post<Response<LoginRes>>(
+    return http.post(
         '/login/username',
         data,
     )
 }
 
 export const changePasswordAPI = (data: {currentPassword: string, password: string, password2: string}) => {
-    return http.patch<Response>(
+    return http.patch(
         '/user/password',
         data,
     )

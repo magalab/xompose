@@ -20,6 +20,9 @@ export default {
     "container": "Container | Containers",
     "url": "URL | URLs",
     "Network name...": "Network name...",
+    "Cancel": "Cancel",
+    "Confirm": "Confirm",
+    "deleteStackMsg": "Are you sure you want to delete this stack?",
 
     "stackName": "Stack Name",
     "deployStack": "Deploy",
@@ -36,6 +39,7 @@ export default {
     "addContainer": "Add Container",
     "Edit": "Edit",
     "Delete": "Delete",
+    "Terminal": "Terminal",
 
     "Image": "Image",
     "Port": "Port | Ports",

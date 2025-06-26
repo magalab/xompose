@@ -28,7 +28,7 @@ type Service interface {
 	// Logs executes the equivalent to a `compose logs`
 	Logs(ctx context.Context, projectName string, consumer LogConsumer, options LogOptions) error
 	// Ps executes the equivalent to a `compose ps`
-	// Ps(ctx context.Context, projectName string, options PsOptions) ([]ContainerSummary, error)
+	Ps(ctx context.Context, projectName string, options PsOptions) ([]ContainerSummary, error)
 	// List executes the equivalent to a `docker stack ls`
 	List(ctx context.Context, options ListOptions) ([]Stack, error)
 	// Remove executes the equivalent to a `compose rm`

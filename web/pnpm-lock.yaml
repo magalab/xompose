@@ -65,6 +65,9 @@ importers:
       yaml:
         specifier: ^2.8.0
         version: 2.8.0
+      yaml-types:
+        specifier: ^0.4.0
+        version: 0.4.0(yaml@2.8.0)
     devDependencies:
       '@iconify-json/ep':
         specifier: ^1.2.2
@@ -2491,6 +2494,12 @@ packages:
   yaml-eslint-parser@1.3.0:
     resolution: {integrity: sha512-E/+VitOorXSLiAqtTd7Yqax0/pAS3xaYMP+AUUJGOK1OZG3rhcj9fcJOM5HJ2VrP1FrStVCWr1muTfQCdj4tAA==}
     engines: {node: ^14.17.0 || >=16.0.0}
+
+  yaml-types@0.4.0:
+    resolution: {integrity: sha512-XfbA30NUg4/LWUiplMbiufUiwYhgB9jvBhTWel7XQqjV+GaB79c2tROu/8/Tu7jO0HvDvnKWtBk5ksWRrhQ/0g==}
+    engines: {node: '>= 16', npm: '>= 7'}
+    peerDependencies:
+      yaml: ^2.3.0
 
   yaml@2.8.0:
     resolution: {integrity: sha512-4lLa/EcQCB0cJkyts+FpIRx5G/llPxfP6VQU5KByHEhLxY3IJCH0f0Hy1MHI8sClTvsIb8qwRJ6R/ZdlDJ/leQ==}
@@ -5150,6 +5159,10 @@ snapshots:
   yaml-eslint-parser@1.3.0:
     dependencies:
       eslint-visitor-keys: 3.4.3
+      yaml: 2.8.0
+
+  yaml-types@0.4.0(yaml@2.8.0):
+    dependencies:
       yaml: 2.8.0
 
   yaml@2.8.0: {}

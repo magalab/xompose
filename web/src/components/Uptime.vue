@@ -17,7 +17,7 @@ const props = defineProps({
 })
 
 const color = computed(() => {
-    statusColor(props.stack?.status)
+    statusColor(props.stack!.stackStatus)
 })
 
 // const statusName = computed (() => {

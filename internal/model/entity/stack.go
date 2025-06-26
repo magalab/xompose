@@ -18,4 +18,5 @@ type Stack struct {
 	YamlContent string      `json:"yamlContent" orm:"yaml_content" ` // yaml 文件
 	StackStatus string      `json:"stackStatus" orm:"stack_status" ` // 服务状态
 	YamlPath    string      `json:"yamlPath"    orm:"yaml_path"    ` // YAML文件路劲
+	EnvContent  string      `json:"envContent"  orm:"env_content"  ` // 环境变量
 }

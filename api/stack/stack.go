@@ -19,5 +19,7 @@ type IStackV1 interface {
 	StackDeploy(ctx context.Context, req *v1.StackDeployReq) (res *v1.StackDeployRes, err error)
 	StackStart(ctx context.Context, req *v1.StackStartReq) (res *v1.StackStartRes, err error)
 	StackStop(ctx context.Context, req *v1.StackStopReq) (res *v1.StackStopRes, err error)
+	StackDown(ctx context.Context, req *v1.StackDownReq) (res *v1.StackDownRes, err error)
 	StackRestart(ctx context.Context, req *v1.StackRestartReq) (res *v1.StackRestartRes, err error)
+	StackStatus(ctx context.Context, req *v1.StackStatusReq) (res *v1.StackStatusRes, err error)
 }

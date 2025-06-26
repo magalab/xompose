@@ -20,4 +20,5 @@ type Stack struct {
 	YamlContent interface{} // yaml 文件
 	StackStatus interface{} // 服务状态
 	YamlPath    interface{} // YAML文件路劲
+	EnvContent  interface{} // 环境变量
 }

@@ -18,15 +18,10 @@
         <div v-if="externalNetworkList.length === 0">
             {{ $t("No External Networks") }}
         </div>
-        <div v-for="(networkName, index) in externalNetworkList" :key="networkName.value" class="my-3">
-            <!-- <input :id="'external-network' + index" v-model="selectedExternalList[networkName]" type="checkbox">
-
-            <label :for="'external-network' + index">
-                {{ networkName }}
-            </label> -->
-            <el-switch v-model="selectedExternalList[networkName]" @change="() => onChange(networkName)">
+        <div v-for="(item, index) in externalNetworkList" :key="index" class="my-3">
+            <el-switch v-model="selectedExternalList[item.name]" @change="() => onChange(item)">
             </el-switch>
-            <span>{{ networkName }}</span>
+            <span>{{ item.name }}</span>
 
             <!-- <span v-if="false" class="text-danger ms-2 delete">Delete</span> -->
         </div>
@@ -46,10 +41,13 @@
 </template>
 
 <script setup lang="ts">
+import { networkListAPI } from '@/api/network'
+import type { NetworkItem } from '@/types/network'
+
 const networkList = ref([])
 const externalList = ref([])
-const selectedExternalList = ref([])
-const externalNetworkList = ref<Object[]>([])
+const selectedExternalList = ref<Object>({})
+const externalNetworkList = ref<NetworkItem[]>([])
 
 const jsonConfig = computed(() => {
     // return this.$parent.$parent.jsonConfig
@@ -75,15 +73,15 @@ const endpoint = computed(() => {
 })
 
 watch(networkList, (newList, oldList) => {
-    console.log(oldList, 234, newList, 123)
+    // console.log(oldList, 234, newList, 123)
 }, { deep: true })
 
 watch(selectedExternalList, (newList, oldList) => {
-    console.log(oldList, 561, newList, 123)
+    // console.log(oldList, 561, newList, 123)
 }, { deep: true })
 
 watchEffect(() => {
-    console.log(selectedExternalList, 55555)
+    // console.log(selectedExternalList, 55555)
     
 })
 
@@ -120,27 +118,10 @@ const loadNetworkList = () => {
     }
 }
 
-const loadExternalNetworkList = () => {
-    // TODO api 获取
-    // this.$root.emitAgent(this.endpoint, "getDockerNetworkList", (res) => {
-    //     if (res.ok) {
-    //         this.externalNetworkList = res.dockerNetworkList.filter((n) => {
-    //             // Filter out this stack networks
-    //             if (n.startsWith(this.stack.name + "_")) {
-    //                 return false
-    //             }
-    //             // They should be not supported.
-    //             // https://docs.docker.com/compose/compose-file/06-networks/#host-or-none
-    //             if (n === "none" || n === "host" || n === "bridge") {
-    //                 return false
-    //             }
-    //             return true
-    //         })
-    //     } else {
-    //         this.$root.toastRes(res)
-    //     }
-    // })
-    return externalNetworkList.value.push(...["default", "compose_default"])
+const loadExternalNetworkList = async () => {
+    const res = await networkListAPI()
+    externalNetworkList.value = res.items
+    console.log(externalNetworkList.value)
 }
 
 const addField = () => {
