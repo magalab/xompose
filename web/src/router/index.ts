@@ -30,6 +30,7 @@ const routes: RouteRecordRaw[] = [
                                 path: "terminal/:stackName/:serviceName/:type",
                                 component: () => import("@/views/ContainerTerminal.vue"),
                                 name: "containerTerminal",
+                                props: true,
                             },
                             {
                                 path: "terminal/:stackName/:serviceName/:type/:endpoint",

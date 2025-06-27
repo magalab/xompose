@@ -40,6 +40,7 @@ export default {
     "Edit": "Edit",
     "Delete": "Delete",
     "Terminal": "Terminal",
+    "Log": "Log",
 
     "Image": "Image",
     "Port": "Port | Ports",
@@ -51,6 +52,7 @@ export default {
     "EnvironmentVariable": "Environment Variable | Environment Variables",
     "RestartPolicy": "Restart Policy",
     "ContainerName": "Container Name",
+    "Switch to sh": "Switch to sh",
 
     "Lowercase only": "Lowercase only",
 

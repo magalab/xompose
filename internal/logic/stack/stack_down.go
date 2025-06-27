@@ -21,7 +21,7 @@ func (s *sStack) StackDown(ctx context.Context, req *model.StackGetReq) error {
 	if stack == nil {
 		return gerror.NewCode(gcode.CodeNotFound, "服务不存在")
 	}
-	c, _ := client.NewClientWithOpts(client.FromEnv)
+	c, _ := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	xCli := compose.NewComposeService(c)
 	if err = xCli.Down(ctx, req.StackName, api.DownOptions{}); err != nil {
 		return err

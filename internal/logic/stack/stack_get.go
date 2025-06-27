@@ -19,7 +19,7 @@ func (s *sStack) StackGet(ctx context.Context, req *model.StackGetReq) (*model.S
 		return nil, err
 	}
 	// 不盘空, 有未托管的服务
-	c, _ := client.NewClientWithOpts(client.FromEnv)
+	c, _ := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	xCli := compose.NewComposeService(c)
 	stacks, err := xCli.List(ctx, api.ListOptions{All: true})
 	if err != nil {

@@ -5,6 +5,7 @@
 package logic
 
 import (
+	_ "xompose/internal/logic/log"
 	_ "xompose/internal/logic/login"
 	_ "xompose/internal/logic/network"
 	_ "xompose/internal/logic/stack"

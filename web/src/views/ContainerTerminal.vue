@@ -1,72 +1,50 @@
 <template>
     <transition name="slide-fade" appear>
         <div>
-            <h1 class="mb-3">{{$t("terminal")}} - {{ serviceName }} ({{ stackName }})</h1>
-
+            <h1 class="mb-3">{{ $t("Terminal") }} - {{ serviceName }} ({{ stackName }})</h1>
             <div class="mb-3">
-                <router-link :to="sh" class="btn btn-normal me-2">{{ $t("Switch to sh") }}</router-link>
+                <router-link :to="sh" >{{ $t("Switch to sh") }}</router-link>
             </div>
 
-            <Terminal class="terminal" :rows="20" mode="interactive" :name="terminalName" :stack-name="stackName" :service-name="serviceName" :shell="shell" :endpoint="endpoint"></Terminal>
+            <Terminal :rows="20" :cols="80" :name="terminalName" :stack-name="stackName" :service-name="serviceName" :type="type"
+                :endpoint="endpoint">
+            </Terminal>
         </div>
     </transition>
 </template>
 
-<script>
-import { getContainerExecTerminalName } from '@/utils/container';
+<script setup lang="ts">
 
-
-export default {
-    components: {
+const props = defineProps({
+    stackName: String,
+    endpoint: {
+        type: String,
+        default: "",
     },
-    data() {
-        return {
+    type: String,
+    serviceName: String,
 
-        };
-    },
-    computed: {
-        stackName() {
-            return this.$route.params.stackName;
-        },
-        endpoint() {
-            return this.$route.params.endpoint || "";
-        },
-        shell() {
-            return this.$route.params.type;
-        },
-        serviceName() {
-            return this.$route.params.serviceName;
-        },
-        terminalName() {
-            return getContainerExecTerminalName(this.endpoint, this.stackName, this.serviceName, 0);
-        },
-        sh() {
-            let endpoint = this.$route.params.endpoint;
+})
 
-            let data = {
-                name: "containerTerminal",
-                params: {
-                    stackName: this.stackName,
-                    serviceName: this.serviceName,
-                    type: "sh",
-                },
-            };
+const terminalName = computed(() => {
+    return `"container-exec-" + ${props.endpoint} + "-" + ${props.stackName} + "-" + ${props.serviceName}`
 
-            if (endpoint) {
-                data.name = "containerTerminalEndpoint";
-                data.params.endpoint = endpoint;
-            }
+})
 
-            return data;
-        },
-    },
-    mounted() {
-
-    },
-    methods: {
-
+const sh = computed(() => {
+    let data = {
+        name: "containerTerminal",
+        params: {
+            endpoint: props.endpoint || "",
+            stackName: props.stackName,
+            serviceName: props.serviceName,
+            type: props.type,
+        }
     }
-};
+
+    return data
+})
+
 </script>
 
 <style scoped lang="scss">

@@ -40,6 +40,7 @@ export default {
     "Edit": "编辑",
     "Delete": "删除",
     "Terminal": "终端",
+    "Log": "日志",
 
     "Image": "镜像",
     "Port": "端口 | 端口组",
@@ -51,6 +52,7 @@ export default {
     "EnvironmentVariable": "环境变量 | 环境变量组",
     "RestartPolicy": "重启策略",
     "ContainerName": "容器名称",
+    "Switch to sh": "切換到 sh",
 
     "Lowercase only": "仅小写字母",
 

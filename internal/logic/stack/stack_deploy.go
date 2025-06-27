@@ -33,7 +33,7 @@ func (s *sStack) StackDeploy(ctx context.Context, req *model.StackAddReq) error 
 	}); err != nil {
 		return err
 	}
-	c, _ := client.NewClientWithOpts(client.FromEnv)
+	c, _ := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	xCli := compose.NewComposeService(c)
 	project, err := utils.YamlToProject(stackPath)
 	if err != nil {

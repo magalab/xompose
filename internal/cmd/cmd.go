@@ -9,11 +9,13 @@ import (
 	"github.com/gogf/gf/v2/os/gcmd"
 
 	"xompose/internal/cmd/middleware"
+	"xompose/internal/controller/log"
 	"xompose/internal/controller/login"
 	"xompose/internal/controller/network"
 	"xompose/internal/controller/stack"
 	"xompose/internal/controller/system"
 	"xompose/internal/controller/user"
+	"xompose/internal/controller/ws"
 )
 
 var (
@@ -36,7 +38,10 @@ var (
 					system.NewV1(),
 					user.NewV1(),
 					network.NewV1(),
+					log.NewV1(),
 				)
+
+			s.BindHandler("/ws/terminal", ws.TerminalWs)
 			s.Run()
 			return nil
 		},

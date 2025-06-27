@@ -27,6 +27,9 @@
 </template>
 
 <script setup lang="ts">
+
+import {type Port} from "@/types/stack"
+
 const props = defineProps({
     name: {
         type: String,
@@ -44,13 +47,22 @@ const props = defineProps({
         type: String,
         default: "service",
     },
+
+    dataList: {
+        type: Array,
+        default: () => [],
+    }
 })
 
 const array = computed(() => {
-    if (!service.value[props.name]) {
-        return [];
+    switch (props.name) {
+        case "ports":
+            return (props.dataList as Port[]).map((item: Port ) =>  `${item.publishPort}:${item.targetPort}`)
+        // case "volumes":
+        //     return 
+        default:
+            return props.dataList || []
     }
-    return service.value[props.name];
 })
 
 

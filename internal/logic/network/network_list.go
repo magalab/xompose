@@ -10,7 +10,7 @@ import (
 )
 
 func (s *sNetwork) NetworkList(ctx context.Context) ([]*model.NetworkItem, error) {
-	c, _ := client.NewClientWithOpts(client.FromEnv)
+	c, _ := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	items, err := c.NetworkList(ctx, network.ListOptions{})
 	if err != nil {
 		return nil, err

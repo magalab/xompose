@@ -40,7 +40,7 @@ type composeService struct {
 // NewComposeService create a local implementation of the compose.Service API
 // func NewComposeService(dockerCli command.Cli) api.Service {
 func NewComposeService(cli *client.Client) api.Service {
-	// c, err := client.NewClientWithOpts(client.FromEnv)
+	// c, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	// if err != nil {
 	// 	panic(fmt.Sprintf("failed to create client :%v", err))
 	// }

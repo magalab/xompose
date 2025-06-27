@@ -57,10 +57,13 @@ type StackDeleteReq struct {
 }
 
 type StackStatusItem struct {
-	Image   string      `json:"image"`
-	Service string      `json:"service"`
-	State   StackStatus `json:"state"`
-	Ports   []*Port     `json:"ports"`
+	Image     string      `json:"image"`
+	Service   string      `json:"service"`
+	State     StackStatus `json:"state"`
+	Ports     []*Port     `json:"ports"`
+	Networks  []string    `json:"networks"`
+	Volumes   []string    `json:"volumes"`
+	DependsOn []string    `json:"dependsOn"`
 }
 
 type Port struct {

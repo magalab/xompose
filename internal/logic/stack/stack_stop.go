@@ -20,7 +20,7 @@ func (s *sStack) StackStop(ctx context.Context, stackName string) error {
 	if stack == nil {
 		return gerror.NewCode(gcode.CodeNotFound, "服务不存在")
 	}
-	c, _ := client.NewClientWithOpts(client.FromEnv)
+	c, _ := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	xCli := compose.NewComposeService(c)
 	project, err := utils.YamlToProject(stack.YamlPath)
 	if err != nil {

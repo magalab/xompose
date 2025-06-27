@@ -69,9 +69,12 @@ export type StackStatusItem = {
     image: string
     state: string
     ports: Port[]
+    networks: string[]
+    volumes: string[]
+    dependsOn: string[]
 }
 
-type Port = {
+export type Port = {
     publishPort: number
     targetPort : number
     protocol: string

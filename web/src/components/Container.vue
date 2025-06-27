@@ -8,20 +8,30 @@
                 </div>
                 <div v-if="!isEditMode">
                     <span class="m-auto w-30% me-1" :class="bgStyle">{{ props.status.state }}</span>
-                    <span v-for="(port, index) in props.status.ports" :key="index" class="py-1 px-2 bg-red-3 rounded-xl">
+                    <span v-for="(port, index) in props.status.ports" :key="index"
+                        class="py-1 px-2 bg-red-3 rounded-xl">
                         {{ port.publishPort }}:{{ port.targetPort }}/{{ port.protocol }}
                     </span>
                 </div>
             </div>
             <div class="flex w-5/12">
-                <div class="flex content-center w-full h-full items-center justify-end">
-                    <router-link v-if="!isEditMode" :to="terminalRouteLink" class="no-underline">
+                <div v-if="!isEditMode" class="flex content-center w-full h-full items-center justify-end">
+                    <router-link :to="terminalRouteLink"
+                        class="no-underline flex items-center rounded-xl bg-pink-3 px-2 py-1">
                         <svg class="i-lucide-terminal"></svg>
-                        Bash
+                        {{ $t("Terminal") }}
                     </router-link>
+                    <div class="ml-10px flex items-center rounded-xl bg-red-3 px-2 py-1" @click="onShowLog">
+                        <svg class="i-lucide-logs"></svg>
+                        {{ $t("Log") }}
+                    </div>
+                    <el-dialog v-model="showLog" :close="onCloseLog">
+                        <LogView :log-list="logList" />
+                    </el-dialog>
                 </div>
             </div>
         </div>
+        <!-- Edit Mode -->
         <div v-if="isEditMode" class="mt-2">
             <el-button type="primary" @click="showConfig = !showConfig" class="rounded-10!">
                 <svg class="i-lucide-edit"></svg>
@@ -41,7 +51,7 @@
                         {{ $t("Image") }}
                     </label>
                     <div class="mb-3">
-                        <el-input v-model="service.image"></el-input>
+                        <el-input v-model="props.status.image"></el-input>
                     </div>
 
                     <!-- TODO: Search online: https://hub.docker.com/api/content/v1/products/search?q=louislam%2Fuptime&source=community&page=1&page_size=4 -->
@@ -56,7 +66,7 @@
                     <label>
                         {{ $t("Port", 2) }}
                     </label>
-                    <ArrayInput name="ports" :display-name="$t('Port')" placeholder="HOST:CONTAINER" />
+                    <ArrayInput name="ports" :display-name="$t('Port')" placeholder="HOST:CONTAINER" :data-list="props.status.ports" />
                 </div>
 
                 <!-- Volumes -->
@@ -64,7 +74,7 @@
                     <label class="form-label">
                         {{ $t("Volume", 2) }}
                     </label>
-                    <ArrayInput name="volumes" :display-name="$t('Volume')" placeholder="HOST:CONTAINER" />
+                    <ArrayInput name="volumes" :display-name="$t('Volume')" placeholder="HOST:CONTAINER" :data-list="props.status.volumes" />
                 </div>
 
                 <!-- Restart Policy -->
@@ -100,7 +110,7 @@
 
                 <!-- Network -->
                 <div class="mb-4">
-                    <label class="form-label">
+                    <label class="">
                         {{ $t("Network", 2) }}
                     </label>
 
@@ -118,7 +128,7 @@
                     <label class="form-label">
                         {{ $t("DependsOn") }}
                     </label>
-                    <ArrayInput name="depends_on" :display-name="$t('DependsOn')" :placeholder="$t(`ContainerName`)" />
+                    <ArrayInput name="depends_on" :display-name="$t('DependsOn')" :placeholder="$t(`ContainerName`)" :data-list="props.status.dependsOn" />
                 </div>
             </div>
         </transition>
@@ -126,15 +136,13 @@
 </template>
 
 <script setup lang="ts">
-
-import { parseDockerPort } from "@/utils/container"
-
 import { type StackStatusItem } from "@/types/stack"
-import type { PropType } from "vue"
 
 const { t } = useI18n()
 
 const showConfig = ref(false)
+
+const showLog = ref(false)
 
 const props = defineProps({
     name: {
@@ -157,19 +165,11 @@ const props = defineProps({
         type: Object as PropType<StackStatusItem>,
         default: {} as StackStatusItem,
     },
-    // service: {
-    //     type: Object,
-    //     default: {}
-    // },
     endpoint: {
         type: String,
         default: "",
         required: false,
     },
-})
-
-onMounted(() => {
-    console.log(props.status, 1231412312)
 })
 
 const onSelect = (e: any) => {
@@ -214,6 +214,39 @@ const bgStyle = computed(() => {
         return "bg-secondary"
     }
 })
+
+let eventSource: any
+
+const logList = ref<string[]>([])
+
+const onShowLog = () => {
+    eventSource = new EventSource(`http://127.0.0.1:9527/api/xompose/v1/log/stream?stackName=${props.stackName}&serviceName=${props.name}`)
+    // eventSource.onmessage = function (event) {
+    //     const data = JSON.parse(event.data)
+    //     console.log("接收数据", data)
+    // }
+    eventSource.addEventListener("connected", function (event) {
+        const data = JSON.parse(event.data)
+        console.log("接收数据", data)
+    })
+    eventSource.addEventListener("message", function (event) {
+        console.log(event.data, 1231231)
+        logList.value.push(event.data)
+        // console.log("接收数据", data)
+    })
+    eventSource.onopen = function (event) {
+        console.log("连接成功", event)
+    }
+    eventSource.onerror = function () {
+        console.log("连接失败")
+    }
+    showLog.value = true
+}
+
+const onCloseLog = () => {
+    showLog.value = false
+    eventSource.close()
+}
 
 
 const remove = () => {

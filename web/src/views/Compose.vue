@@ -92,7 +92,6 @@
                     </div>
 
                     <!-- Containers -->
-                    <!-- <h4 class="mb-3">{{ $tc("container", 2) }}</h4> -->
                     <h4 class="mb-3">{{ $t("container", 2) }}</h4>
                     <div v-if="isEditMode" class="flex mb-3">
                         <el-input v-model="newContainerName" :placeholder="$t(`New Container Name...`)"
@@ -110,12 +109,6 @@
                         </Container>
                     </div>
 
-                    <!-- <el-button
-                        v-if="false && isEditMode && jsonConfig.services && Object.keys(jsonConfig.services).length > 0"
-                        class="btn btn-normal mb-3" @click="addContainer">
-                        {{ $t("addContainer") }}
-                    </el-button> -->
-
                     <!-- General -->
                     <!-- 额外 -->
                     <!-- <div v-if="isEditMode">
@@ -129,15 +122,6 @@
                             </div>
                         </div>
                     </div> -->
-
-                    <!-- Combined Terminal Output -->
-                    <div v-show="!isEditMode">
-                        <h4 class="mb-3"> {{ $t("Terminal") }} </h4>
-                        <Terminal ref="combinedTerminal" class="mb-3 h-200px" :name="combinedTerminalName"
-                            :endpoint="endpoint" :rows="combinedTerminalRows" :cols="combinedTerminalCols"
-                            style="height: 315px">
-                        </Terminal>
-                    </div>
                 </div>
                 <div class="lg:w-1/2">
                     <h4 class="mb-3">{{ stack.yamlPath.split("/")[-1] }}</h4>
@@ -196,11 +180,47 @@
                     <el-button type="danger" @click="deleteStack">{{ $t("Confirm") }}</el-button>
                 </template>
             </el-dialog>
+            <!-- <template> -->
+            <div ref="iTerminalRef" class="w-full h-full bg-red-7"></div>
+            <!-- </template> -->
         </div>
     </transition>
 </template>
 
 <script setup lang="ts">
+
+import "@xterm/xterm/css/xterm.css"
+
+// terminal 测试
+import { Terminal } from "@xterm/xterm";
+import { AttachAddon } from '@xterm/addon-attach'
+const iTerminalRef = ref<HTMLElement>()
+
+const terminal = ref<Terminal>()
+
+// const terminalFitAddOn = ref()
+
+onMounted(() =>{
+    terminal.value = new Terminal({
+        fontSize: 14,
+        cursorBlink: true,
+        cols: 105,
+        rows: 10,
+    })
+
+    const ws = new WebSocket("ws://127.0.0.1:9527/ws/terminal?container=xxx-nginx-3-1")
+    ws.onclose = () => {
+        console.log("服务器跑了")
+    }
+    const attachAddon = new AttachAddon(ws)
+    terminal.value.loadAddon(attachAddon)
+    terminal.value.open(iTerminalRef.value!)
+
+})
+
+
+
+
 import {
     COMBINED_TERMINAL_COLS,
     COMBINED_TERMINAL_ROWS,
@@ -247,6 +267,7 @@ const route = useRoute()
 const router = useRouter()
 
 const isEditMode = ref(false)
+
 
 
 

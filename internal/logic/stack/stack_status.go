@@ -2,6 +2,7 @@ package stack
 
 import (
 	"context"
+	"strings"
 	"xompose/internal/dao"
 	"xompose/internal/model"
 	"xompose/pkg/api"
@@ -17,7 +18,7 @@ func (s *sStack) StackStatus(ctx context.Context, req *model.StackGetReq) ([]*mo
 	if err != nil {
 		return nil, err
 	}
-	c, _ := client.NewClientWithOpts(client.FromEnv)
+	c, _ := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	xCli := compose.NewComposeService(c)
 	project, err := utils.YamlToProject(stack.YamlPath)
 	if err != nil {
@@ -32,6 +33,10 @@ func (s *sStack) StackStatus(ctx context.Context, req *model.StackGetReq) ([]*mo
 		return nil, err
 	}
 	statusItems := lo.Map(items, func(item api.ContainerSummary, _ int) *model.StackStatusItem {
+		label := item.Labels[api.DependenciesLabel]
+		depends := lo.Map(strings.Split(label, ","), func(x string, _ int) string {
+			return strings.Split(x, ":")[0]
+		})
 		ports := lo.FilterMap(item.Publishers, func(port api.PortPublisher, _ int) (*model.Port, bool) {
 			// filter ipv6
 			if port.URL == "::" {
@@ -44,10 +49,13 @@ func (s *sStack) StackStatus(ctx context.Context, req *model.StackGetReq) ([]*mo
 			}, true
 		})
 		return &model.StackStatusItem{
-			Image:   item.Image,
-			Service: item.Service,
-			State:   model.StackStatus(item.State),
-			Ports:   ports,
+			Image:     item.Image,
+			Service:   item.Service,
+			State:     model.StackStatus(item.State),
+			Ports:     ports,
+			Networks:  item.Networks,
+			Volumes:   item.Mounts,
+			DependsOn: depends,
 		}
 	})
 

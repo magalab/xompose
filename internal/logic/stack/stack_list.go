@@ -12,7 +12,7 @@ import (
 )
 
 func (s *sStack) StackList(ctx context.Context, req *model.StackListReq) ([]*model.StackListItem, error) {
-	c, _ := client.NewClientWithOpts(client.FromEnv)
+	c, _ := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	xCli := compose.NewComposeService(c)
 	stacks, err := xCli.List(ctx, api.ListOptions{All: true})
 	if err != nil {

@@ -13,6 +13,7 @@ import (
 type (
 	IStack interface {
 		StackDelete(ctx context.Context, req *model.StackDeleteReq) error
+		StackDeploy(ctx context.Context, req *model.StackAddReq) error
 		StackDown(ctx context.Context, req *model.StackGetReq) error
 		StackGet(ctx context.Context, req *model.StackGetReq) (*model.StackListItem, error)
 		StackList(ctx context.Context, req *model.StackListReq) ([]*model.StackListItem, error)

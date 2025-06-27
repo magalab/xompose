@@ -43,6 +43,7 @@ declare module 'vue' {
     IEpSearch: typeof import('~icons/ep/search')['default']
     IEpUser: typeof import('~icons/ep/user')['default']
     Login: typeof import('./components/Login.vue')['default']
+    LogView: typeof import('./components/LogView.vue')['default']
     NetworkInput: typeof import('./components/NetworkInput.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
@@ -53,5 +54,8 @@ declare module 'vue' {
     TwoFADialog: typeof import('./components/TwoFADialog.vue')['default']
     Uptime: typeof import('./components/Uptime.vue')['default']
     YamlEditor: typeof import('./components/YamlEditor.vue')['default']
+  }
+  export interface GlobalDirectives {
+    vInfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']
   }
 }
